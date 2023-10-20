@@ -59,7 +59,7 @@ const Navbar = () => {
 			{/* Dekstop */}
 			<div className="flex justify-between relative top-3 hidden lg:flex">
 				<div>
-					<img src="/LogoPHI.png" className="w-12 h-12 rounded-full" alt="" />
+					<img src="/LogoLPMaarif.png" className="w-15 h-12 rounded-12" alt="" />
 				</div>
 				<ul className="mt-2 flex gap-5">
 					<li className="mb-4">

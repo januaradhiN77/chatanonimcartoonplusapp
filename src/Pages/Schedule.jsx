@@ -7,6 +7,8 @@ const Selasa = React.lazy(() => import("../components/Mapel/Selasa"));
 const Rabu = React.lazy(() => import("../components/Mapel/Rabu"));
 const Kamis = React.lazy(() => import("../components/Mapel/Kamis"));
 const Jumat = React.lazy(() => import("../components/Mapel/Jumat"));
+const Sabtu = React.lazy(() => import("../components/Mapel/Sabtu"));
+
 
 const Schedule = () => {
   const daysOfWeek = [
@@ -31,21 +33,14 @@ const Schedule = () => {
   // Menentukan kelompok piket berdasarkan minggu saat ini
   if (currentWeek === 1 || currentWeek === 3) {
     piketGroup = [
-      ["Nicolas", "Togi", "Paulista", "Damar"],
-      ["Farel", "Jeriko", "Wahyu", "Davina"],
-      ["Alya", "Hendri", "Hisyam", "Dafy"],
-      ["Putri", "Natar", "Wahid", "Fadliansyah"],
-      ["Cariska", "Pratiwi", "Ridho", "Farji"],
+      ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
+      ["Alfina", "Karisa", "Dimas", "Dinar", "Eka", "Arifah"],
+      ["Evelyn", "Januar", "Akmal", "Nasyabella", "Suci", "Safira"],
+      ["Mutia", "Triana", "Nurul", "Oliv", "Luthfi", "Diah"],
+      ["Jeslin", "Fitria", "Asih", "Ratna", "Syariana"],
+      ["Neysya", "Dea", "Nayla", "Ajeng", "Alfin", "Farhan"],
     ];
-  } else if (currentWeek === 2 || currentWeek === 4) {
-    piketGroup = [
-      ["Annissa", "Daus", "Eki", "Attala"],
-      ["Sera", "Sultan", "Dimas", "Lista"],
-      ["Windi", "Amel", "Arif", "Fadli"],
-      ["Zaini", "Dendi", "Raka", "Bari"],
-      ["Putri", "Paulista", "Nila"],
-    ];
-  }
+  } 
 
   const dayComponents = [
     null, // Kosongkan indeks 0
@@ -54,6 +49,7 @@ const Schedule = () => {
     Rabu,
     Kamis,
     Jumat,
+    Sabtu,
   ];
 
   // Menampilkan komponen berdasarkan hari saat ini
