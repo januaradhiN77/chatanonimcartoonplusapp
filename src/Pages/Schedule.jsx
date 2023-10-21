@@ -76,7 +76,7 @@ const Schedule = () => {
                 <TodayComponent />
               </React.Suspense>
             ) : (
-              <p className="opacity-50">Tidak Ada Jadwal Hari Ini</p>
+              <p className="opacity-50">Hari ini hari minggu! selamat beristirahat</p>
             )}
           </div>
         </div>
@@ -105,7 +105,7 @@ const Schedule = () => {
             </div>
           ))
         ) : (
-          <p className="opacity-50">Tidak ada Jadwal Piket Hari Ini</p>
+          <p className="opacity-50">Hari ini hari minggu! selamat beristirahat</p>
         )}
       </div>
     </>
