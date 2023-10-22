@@ -180,7 +180,7 @@ function Chat() {
   return (
     <div className="" id="ChatAnonim">
       <div className="text-center text-4xl font-semibold" id="Glow">
-        Text Anonim
+        Pesan Anonim
       </div>
 
       <div className="mt-5" id="KotakPesan" style={{ overflowY: "auto" }}>
