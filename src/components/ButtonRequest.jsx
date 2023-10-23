@@ -60,8 +60,8 @@ export default function ButtonRequest() {
 				onClick={handleOpen}
 				className="flex items-center space-x-2 text-white px-6 py-4"
 				id="SendRequest">
-				<img src="/Request.png" alt="Icon" className="w-6 h-6 relative bottom-1 " />
-				<span className="text-base lg:text-1xl">Request Upload</span>
+				<img src="/Request.png" alt="Icon" className="w-6 h-6 relative bottom-1" />
+				<span className="text-base lg:text-1xl">Request</span>
 			</button>
 
 			<Modal

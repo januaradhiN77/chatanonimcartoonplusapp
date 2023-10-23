@@ -79,7 +79,7 @@ function UploadImage() {
             Swal.fire({
               icon: "success",
               title: "Berhasil!",
-              text: "Foto yang kamu upload sudah berhasil. cek di Request Upload dan menunggu untuk ditambahkan di database. -Januar",
+              text: "Foto yang kamu upload sudah berhasil. cek di Request dan menunggu untuk ditambahkan di database. -Januar",
 			  customClass: {
 				container: "sweet-alert-container",
 			},
