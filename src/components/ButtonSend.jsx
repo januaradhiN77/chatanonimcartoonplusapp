@@ -69,7 +69,7 @@ export default function ButtonSend() {
 		<div>
 			<Button onClick={handleOpen}>
 				<button className="flex items-center space-x-2 text-white px-6 py-4" id="SendImg">
-					<span className="text-base lg:text-1xl">Send</span>
+					<span className="text-base lg:text-1xl">Upload Foto</span>
 					<img src="/upload.png" alt="Icon" className="w-6 h-6" />
 				</button>
 			</Button>

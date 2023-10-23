@@ -42,7 +42,7 @@ function UploadImage() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "You have reached the maximum uploads for today.",
+        text: "Kamu sudah melewati batas mengupload foto, coba lagi esok hari :)",
 		customClass: {
 			container: "sweet-alert-container",
 		},
@@ -59,7 +59,7 @@ function UploadImage() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "The maximum size for a photo is 10MB",
+        text: "Foto maximum yang bisa di upload 10MB",
 		customClass: {
 			container: "sweet-alert-container",
 		},
@@ -78,8 +78,8 @@ function UploadImage() {
 
             Swal.fire({
               icon: "success",
-              title: "Success!",
-              text: "Your image has been successfully uploaded.",
+              title: "Berhasil!",
+              text: "Foto yang kamu upload sudah berhasil. cek di Request Upload dan menunggu untuk ditambahkan di database. -Januar",
 			  customClass: {
 				container: "sweet-alert-container",
 			},
@@ -137,7 +137,7 @@ function UploadImage() {
 											d="M12 6v6m0 0v6m0-6h6m-6 0H6"
 										/>
 									</svg>
-									<p className="text-white opacity-60">Click to select an image</p>
+									<p className="text-white opacity-60">Klik untuk pilih gambar dari file</p>
 								</div>
 							)}
 						</label>

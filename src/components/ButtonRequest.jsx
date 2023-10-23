@@ -61,7 +61,7 @@ export default function ButtonRequest() {
 				className="flex items-center space-x-2 text-white px-6 py-4"
 				id="SendRequest">
 				<img src="/Request.png" alt="Icon" className="w-6 h-6 relative bottom-1 " />
-				<span className="text-base lg:text-1xl">Request</span>
+				<span className="text-base lg:text-1xl">Request Upload</span>
 			</button>
 
 			<Modal
@@ -81,7 +81,7 @@ export default function ButtonRequest() {
 							onClick={handleClose}
 						/>
 						<Typography id="spring-modal-description" sx={{ mt: 2 }}>
-							<h6 className="text-center text-white text-2xl mb-5">Request</h6>
+							<h6 className="text-center text-white text-2xl mb-5">Request Upload</h6>
 							<div className="h-[22rem] overflow-y-scroll overflow-y-scroll-no-thumb">
 								{images
 									.map((imageData, index) => (
