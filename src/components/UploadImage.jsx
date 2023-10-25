@@ -79,7 +79,7 @@ function UploadImage() {
             Swal.fire({
               icon: "success",
               title: "Berhasil!",
-              text: "Foto yang kamu upload sudah berhasil. cek di Request dan menunggu untuk ditambahkan di database. -Januar",
+              text: "Foto yang kamu upload sudah berhasil. silahkan refresh halaman web. -Januar",
 			  customClass: {
 				container: "sweet-alert-container",
 			},
@@ -103,7 +103,7 @@ function UploadImage() {
 		<div className="flex flex-col justify-center items-center">
 			<div className="text-center mb-4">
 				<h1 className="text-1xl md:text-2xl md:px-10 font-bold mb-4 w-full text-white">
-					Upload Your Classroom Memories
+					Upload Foto
 				</h1>
 			</div>
 

@@ -81,7 +81,7 @@ export default function ButtonRequest() {
 							onClick={handleClose}
 						/>
 						<Typography id="spring-modal-description" sx={{ mt: 2 }}>
-							<h6 className="text-center text-white text-2xl mb-5">Request Upload</h6>
+							<h6 className="text-center text-white text-2xl mb-5">Uploaded</h6>
 							<div className="h-[22rem] overflow-y-scroll overflow-y-scroll-no-thumb">
 								{images
 									.map((imageData, index) => (

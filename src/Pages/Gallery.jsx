@@ -24,7 +24,7 @@ const Carousel = () => {
 	const fetchImagesFromFirebase = async () => {
 		try {
 			const storage = getStorage() // Mendapatkan referensi Firebase Storage
-			const storageRef = ref(storage, "GambarAman/") // Menggunakan ref dengan storage
+			const storageRef = ref(storage, "images/") // Menggunakan ref dengan storage
 
 			const imagesList = await listAll(storageRef) // Menggunakan listAll untuk mendapatkan daftar gambar
 
