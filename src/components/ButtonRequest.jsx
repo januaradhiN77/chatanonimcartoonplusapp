@@ -92,7 +92,7 @@ export default function ButtonRequest() {
 											<img
 												src={imageData.url}
 												alt={`Image ${index}`}
-												className="h-10 w-10 blur-sm"
+												className="h-10 w-10"
 											/>
 											<span className="ml-2 text-white">
 												{new Date(imageData.timestamp).toLocaleString()}
