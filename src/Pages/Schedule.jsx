@@ -13,12 +13,12 @@ const Sabtu = React.lazy(() => import("../components/Mapel/Sabtu"));
 const Schedule = () => {
   const daysOfWeek = [
     "Minggu",
-    "Senin",
-    "Selasa",
-    "Rabu",
-    "Kamis",
-    "Jumat",
-    "Sabtu",
+    "Senin A",
+    "Selasa A",
+    "Rabu A",
+    "Kamis A",
+    "Jumat A",
+    "Sabtu A",
   ];
   const currentDay = daysOfWeek[new Date().getDay()];
   const currentWeek = Math.floor((new Date().getDate() - 1) / 7) + 1;
