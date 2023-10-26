@@ -21,7 +21,7 @@ const Schedule = () => {
     "Sabtu A",
   ];
   const currentDay = daysOfWeek[new Date().getDay()];
-  const currentWeek = Math.floor((new Date().getDate() - 1) / 7) + 1;
+  const currentWeek = Math.floor((new Date().getDate() - 1) / 7) + 0;
 
   useEffect(() => {
     AOS.init();
@@ -31,7 +31,7 @@ const Schedule = () => {
   let piketGroup = [];
 
   // Menentukan kelompok piket berdasarkan minggu saat ini
-  if (currentWeek === 1 || currentWeek === 4) {
+  if (currentWeek === 1 || currentWeek === 3) {
     piketGroup = [
       ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
       ["Alfina", "Karisa", "Dimas", "Dinar", "Eka", "Arifah"],
@@ -105,7 +105,7 @@ const Schedule = () => {
             </div>
           ))
         ) : (
-          <p className="opacity-50">Tidak ada jadwal yang tersedia. selamat beristiraha</p>
+          <p className="opacity-50">Tidak ada jadwal yang tersedia. selamat beristirahat</p>
         )}
       </div>
     </>
