@@ -31,7 +31,7 @@ const Schedule = () => {
   let piketGroup = [];
 
   // Menentukan kelompok piket berdasarkan minggu saat ini
-  if (currentWeek === 1 || currentWeek === 4) {
+  if (currentWeek === 1 || currentWeek === 3) {
     piketGroup = [
       ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
       ["Alfina", "Karisa", "Dimas", "Dinar", "Eka", "Arifah"],
