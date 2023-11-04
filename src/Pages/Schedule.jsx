@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, startTransition, Suspense } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -40,10 +40,19 @@ const Schedule = () => {
       ["Jeslin", "Fitria", "Asih", "Ratna", "Syariana"],
       ["Neysya", "Dea", "Nayla", "Ajeng", "Alfin", "Farhan"],
     ];
-  } 
+  } else if (currentWeek === 2 || currentWeek === 5) {
+    piketGroup = [
+      ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
+      ["Alfina", "Karisa", "Dimas", "Dinar", "Eka", "Arifah"],
+      ["Evelyn", "Januar", "Akmal", "Nasyabella", "Suci", "Safira"],
+      ["Mutia", "Triana", "Nurul", "Oliv", "Luthfi", "Diah"],
+      ["Jeslin", "Fitria", "Asih", "Ratna", "Syariana"],
+      ["Neysya", "Dea", "Nayla", "Ajeng", "Alfin", "Farhan"],
+    ];
+  }
 
   const dayComponents = [
-    null, // Kosongkan indeks 0
+    null, // kosongkan indeks 0
     Senin,
     Selasa,
     Rabu,
@@ -52,10 +61,10 @@ const Schedule = () => {
     Sabtu,
   ];
 
-  // Menampilkan komponen berdasarkan hari saat ini
+  // Menampilkan komponen berdasarkan hari ini
   const TodayComponent = dayComponents[new Date().getDay()];
 
-  // Menampilkan nama-nama piket sesuai dengan hari dan minggu saat ini
+  // Menampilkan nama-nama piket sesuai deangan hari ini dan minggu saat ini
   const currentPiketNames = piketGroup[new Date().getDay() - 1];
 
   return (

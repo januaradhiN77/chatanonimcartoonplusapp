@@ -59,7 +59,7 @@ function UploadImage() {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Foto maximum yang bisa di upload 10MB",
+        text: "Foto maximum yang bisa di upload sebesar 10MB",
 		customClass: {
 			container: "sweet-alert-container",
 		},
