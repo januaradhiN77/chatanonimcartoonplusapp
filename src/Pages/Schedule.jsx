@@ -30,7 +30,7 @@ const Schedule = () => {
 
   let piketGroup = [];
 
-  // Menentukan kelompok piket berdasarkan minggu saat ini
+ 
   if (currentWeek === 1 || currentWeek === 4) {
     piketGroup = [
       ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
@@ -52,7 +52,7 @@ const Schedule = () => {
   }
 
   const dayComponents = [
-    null, // kosongkan indeks 0
+    null, 
     Senin,
     Selasa,
     Rabu,
@@ -61,10 +61,7 @@ const Schedule = () => {
     Sabtu,
   ];
 
-  // Menampilkan komponen berdasarkan hari ini
   const TodayComponent = dayComponents[new Date().getDay()];
-
-  // Menampilkan nama-nama piket sesuai deangan hari ini dan minggu saat ini
   const currentPiketNames = piketGroup[new Date().getDay() - 1];
 
   return (
