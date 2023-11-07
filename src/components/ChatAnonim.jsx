@@ -95,7 +95,7 @@ function Chat() {
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
-          text: "You have reached your daily message limit.",
+          text: "Pesan limit coba lagi nanti :(",
           customClass: {
             container: "sweet-alert-container",
           },
@@ -125,7 +125,7 @@ function Chat() {
         Swal.fire({
           icon: "error",
           title: "Blocked",
-          text: "You are blocked from sending messages.",
+          text: "IP kamu di blokir dan tidak dapat mengirim pesan :(",
           customClass: {
             container: "sweet-alert-container",
           },
@@ -141,7 +141,7 @@ function Chat() {
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
-          text: "You have reached your daily message limit.",
+          text: "Kamu sudah melebihi batas mengirim pesan hari ini, coba lagi besok :).",
           customClass: {
             container: "sweet-alert-container",
           },
@@ -158,7 +158,9 @@ function Chat() {
         message: trimmedMessage,
         sender: {
           image: senderImageURL,
+          
         },
+        
         timestamp: new Date(),
         userIp: userIp,
       });
@@ -199,7 +201,7 @@ function Chat() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Ketik pesan Anda..."
+          placeholder="Ketik pesan kamu..."
           maxLength={60}
         />
         <button onClick={sendMessage} className="ml-2">
