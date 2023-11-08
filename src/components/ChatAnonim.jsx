@@ -141,7 +141,7 @@ function Chat() {
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
-          text: "Kamu sudah melebihi batas mengirim pesan hari ini, coba lagi besok :).",
+          text: "Kamu sudah melebihi batas mengirim pesan hari ini, coba lagi besok :) -Januar.",
           customClass: {
             container: "sweet-alert-container",
           },
