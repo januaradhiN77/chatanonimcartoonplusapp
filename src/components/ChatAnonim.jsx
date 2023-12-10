@@ -137,7 +137,7 @@ function Chat() {
       const trimmedMessage = message.trim().substring(0, 60);
       const userIpAddress = userIp;
 
-      if (messageCount >= 20) { // Batasan pesan per hari (20 pesan)
+      if (messageCount >= 20) { 
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",

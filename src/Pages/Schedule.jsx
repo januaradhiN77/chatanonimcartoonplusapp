@@ -31,7 +31,7 @@ const Schedule = () => {
   let piketGroup = [];
 
  
-  if (currentWeek === 1 || currentWeek === 4) {
+  if (currentWeek === 1 || currentWeek === 5) {
     piketGroup = [
       ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
       ["Alfina", "Karisa", "Dimas", "Dinar", "Eka", "Arifah"],
@@ -40,7 +40,7 @@ const Schedule = () => {
       ["Jeslin", "Fitria", "Asih", "Ratna", "Syariana"],
       ["Neysya", "Dea", "Nayla", "Ajeng", "Alfin", "Farhan"],
     ];
-  } else if (currentWeek === 2 || currentWeek === 5) {
+  } else if (currentWeek === 2 || currentWeek === 6) {
     piketGroup = [
       ["Feby", "Elsa", "Farih", "Gita", "Husni", "Iin"],
       ["Alfina", "Karisa", "Dimas", "Dinar", "Eka", "Arifah"],
