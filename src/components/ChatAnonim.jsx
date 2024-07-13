@@ -188,7 +188,7 @@ const Chat = () => {
         ))}
         <div ref={messagesEndRef}></div>
       </div>
-      <div id="InputChat" className="flex items-center text-white px-4 mt-5">
+      <div id="InputChat" className="flex items-center text-white px-4 mt-3">
         <input
           className="bg-transparent flex-grow w-10 placeholder:text-white placeholder-opacity-60"
           type="text"
