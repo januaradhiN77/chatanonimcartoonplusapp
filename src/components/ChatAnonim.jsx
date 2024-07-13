@@ -92,7 +92,7 @@ function Chat() {
     if (currentDateString === storedDateString) {
       // Jika tanggal saat ini sama dengan tanggal yang disimpan, periksa batasan pesan
       const userSentMessageCount = parseInt(localStorage.getItem(userIpAddress)) || 0;
-      if (userSentMessageCount >= 20) { // Batasan pesan per hari (2 pesan)
+      if (userSentMessageCount >= 1000) { // Batasan pesan per hari (2 pesan)
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
@@ -135,7 +135,7 @@ function Chat() {
       }
 
       const senderImageURL = auth.currentUser?.photoURL || "/AnonimUser.png";
-      const trimmedMessage = message.trim().substring(0, 60);
+      const trimmedMessage = message.trim().substring(0, 100);
       const userIpAddress = userIp;
 
       if (messageCount >= 1000) { 
