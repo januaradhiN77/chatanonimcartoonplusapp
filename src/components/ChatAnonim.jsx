@@ -4,8 +4,7 @@ import { db, auth } from "../firebase";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-
-function Chat() {
+const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [shouldScrollToBottom, setShouldScrollToBottom] = useState(true);
@@ -15,29 +14,14 @@ function Chat() {
   const chatsCollectionRef = collection(db, "chats");
   const messagesEndRef = useRef(null);
 
-  // Fungsi untuk mengambil daftar alamat IP yang diblokir dari Firebase Firestore
-  const fetchBlockedIPs = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "blacklist_ips"));
-      const blockedIPs = querySnapshot.docs.map((doc) => doc.data().ipAddress);
-      return blockedIPs;
-    } catch (error) {
-      console.error("Gagal mengambil daftar IP yang diblokir:", error);
-      return [];
-    }
-  }
-
   useEffect(() => {
-    // Memuat pesan dari Firestore dan mengatur langganan untuk memantau perubahan
     const queryChats = query(chatsCollectionRef, orderBy("timestamp"));
     const unsubscribe = onSnapshot(queryChats, (snapshot) => {
-      const newMessages = snapshot.docs.map((doc) => {
-        const data = doc.data();
-        return {
-          ...data,
-          userIp: data.userIp,
-        };
-      });
+      const newMessages = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id, // optionally include the document ID
+        userIp: doc.data().userIp,
+      }));
       setMessages(newMessages);
       if (shouldScrollToBottom) {
         scrollToBottom();
@@ -45,12 +29,11 @@ function Chat() {
     });
 
     return () => {
-      unsubscribe(); // Membersihkan langganan saat komponen tidak lagi digunakan
-    }
+      unsubscribe();
+    };
   }, [shouldScrollToBottom]);
 
   useEffect(() => {
-    // Mengambil alamat IP pengguna dan memeriksa batasan pesan
     getUserIp();
     checkMessageCount();
     scrollToBottom();
@@ -60,43 +43,49 @@ function Chat() {
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
     }, 100);
-  }
+  };
 
   const getUserIp = async () => {
     try {
-      // Cek apakah alamat IP sudah disimpan di localStorage
       const cachedIp = localStorage.getItem("userIp");
       if (cachedIp) {
         setUserIp(cachedIp);
         return;
       }
-      // Jika tidak ada di localStorage, ambil alamat IP dari API eksternal
       const response = await axios.get("https://ipapi.co/json");
       const newUserIp = response.data.network;
       setUserIp(newUserIp);
-      // Simpan alamat IP dalam localStorage dengan waktu kedaluwarsa (misalnya, 1 jam)
-      const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 jam
+      const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour
       localStorage.setItem("userIp", newUserIp);
       localStorage.setItem("ipExpiration", expirationTime.toString());
     } catch (error) {
-      console.error("Gagal mendapatkan alamat IP:", error);
+      console.error("Failed to get IP address:", error);
+    }
+  };
+
+  const fetchBlockedIPs = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "blacklist_ips"));
+      const blockedIPs = querySnapshot.docs.map((doc) => doc.data().ipAddress);
+      return blockedIPs;
+    } catch (error) {
+      console.error("Failed to fetch blocked IPs:", error);
+      return [];
     }
   };
 
   const checkMessageCount = () => {
     const userIpAddress = userIp;
-    const currentDate = new Date();
-    const currentDateString = currentDate.toDateString();
+    const currentDate = new Date().toDateString();
     const storedDateString = localStorage.getItem("messageCountDate");
 
-    if (currentDateString === storedDateString) {
-      // Jika tanggal saat ini sama dengan tanggal yang disimpan, periksa batasan pesan
+    if (currentDate === storedDateString) {
       const userSentMessageCount = parseInt(localStorage.getItem(userIpAddress)) || 0;
-      if (userSentMessageCount >= 1000) { // Batasan pesan per hari (2 pesan)
+      if (userSentMessageCount >= 1000) {
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
-          text: "Pesan limit coba lagi nanti :(",
+          text: "You have reached the message limit for today. Try again later.",
           customClass: {
             container: "sweet-alert-container",
           },
@@ -105,13 +94,11 @@ function Chat() {
         setMessageCount(userSentMessageCount);
       }
     } else {
-      // Jika tanggal berbeda, bersihkan data penghitungan pesan sebelumnya
       localStorage.removeItem(userIpAddress);
-      localStorage.setItem("messageCountDate", currentDateString);
+      localStorage.setItem("messageCountDate", currentDate);
     }
   };
 
-  // Fungsi untuk memeriksa apakah alamat IP pengguna ada dalam daftar hitam
   const isIpBlocked = async () => {
     const blockedIPs = await fetchBlockedIPs();
     return blockedIPs.includes(userIp);
@@ -119,14 +106,13 @@ function Chat() {
 
   const sendMessage = async () => {
     if (message.trim() !== "") {
-      // Memanggil isIpBlocked untuk memeriksa apakah pengguna diblokir
       const isBlocked = await isIpBlocked();
 
       if (isBlocked) {
         Swal.fire({
           icon: "error",
           title: "Blocked",
-          text: "IP kamu di blokir dan tidak dapat mengirim pesan :(",
+          text: "Your IP is blocked and cannot send messages.",
           customClass: {
             container: "sweet-alert-container",
           },
@@ -138,11 +124,11 @@ function Chat() {
       const trimmedMessage = message.trim().substring(0, 50);
       const userIpAddress = userIp;
 
-      if (messageCount >= 1000) { 
+      if (messageCount >= 1000) {
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
-          text: "Kamu sudah melebihi batas mengirim pesan hari ini, coba lagi besok :) -Januar.",
+          text: "You have exceeded the daily message limit. Try again tomorrow.",
           customClass: {
             container: "sweet-alert-container",
           },
@@ -154,19 +140,16 @@ function Chat() {
       localStorage.setItem(userIpAddress, updatedSentMessageCount.toString());
       setMessageCount(updatedSentMessageCount);
 
-      // Menambahkan pesan ke Firestore
       await addDoc(chatsCollectionRef, {
         message: trimmedMessage,
         sender: {
           image: senderImageURL,
-          
         },
-        
         timestamp: new Date(),
         userIp: userIp,
       });
 
-      setMessage(""); // Menghapus pesan setelah mengirim
+      setMessage("");
       setTimeout(() => {
         setShouldScrollToBottom(true);
       }, 100);
@@ -180,29 +163,34 @@ function Chat() {
     }
   };
 
+  const formatTimestamp = (timestamp) => {
+    const date = timestamp.toDate(); // Convert Firestore timestamp to JavaScript Date object
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    const formattedTime = `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return `${formattedDate} ${formattedTime}`;
+  };
+
   return (
     <div className="flex flex-col justify-center">
       <div className="flex">
-     
-      <img className="w-10 mr-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
-      
+        <img className="w-10 mr-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png" alt="Logo"/>
       </div>
-     
-  
       <div className="text-center text-4xl font-semibold text-white mb-50">
         Chat Publik
       </div>
-  
       <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
         {messages.map((msg, index) => (
           <div key={index} className="flex items-start text-sm py-1">
-            <img src={msg.sender.image} alt="User Profile" className="h-7 w-7 mr-2" />
-            <div className="relative top-[0.30rem] text-white">{msg.message}</div>
+            <img src={msg.sender.image} alt="User Profile" className="h-10 w-10 mr-2 mt-8" />
+            <div className="relative top-[0.30rem] text-white bg-black-message">
+              <p className="text-base">{msg.message}</p>
+              <p className="text-xs text-gray-400 mt-1">{formatTimestamp(msg.timestamp)}</p>
+            </div>
           </div>
         ))}
         <div ref={messagesEndRef}></div>
       </div>
-  
       <div id="InputChat" className="flex items-center text-white px-4 mt-5">
         <input
           className="bg-transparent flex-grow w-4 placeholder:text-white placeholder-opacity-60"
@@ -214,15 +202,11 @@ function Chat() {
           maxLength={60}
         />
         <button onClick={sendMessage} className="ml-2">
-          <img src="/paper-plane.png" alt="" className="h-4 w-4 lg:h-6 lg:w-6" />
+          <img src="/paper-plane.png" alt="Send" className="h-4 w-4 lg:h-6 lg:w-6" />
         </button>
       </div>
-  
-    
     </div>
   );
-  
-  
 }
 
 export default Chat;
