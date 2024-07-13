@@ -181,7 +181,7 @@ function Chat() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col justify-center">
       <div className="flex">
      
       <img className="w-10 mr-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
