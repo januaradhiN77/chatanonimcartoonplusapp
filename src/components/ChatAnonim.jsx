@@ -135,7 +135,7 @@ function Chat() {
       }
 
       const senderImageURL = auth.currentUser?.photoURL || "/AnonimUser.png";
-      const trimmedMessage = message.trim().substring(0, 100);
+      const trimmedMessage = message.trim().substring(0, 50);
       const userIpAddress = userIp;
 
       if (messageCount >= 1000) { 
@@ -185,9 +185,7 @@ function Chat() {
       <div className="flex">
      
       <img className="w-10 mr-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
-      <a href="https://cartoonapp.netlify.app" className="text-white text-4xl font-bold">
-        X
-      </a>
+      
       </div>
      
   
