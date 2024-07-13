@@ -4,6 +4,7 @@ import { db, auth } from "../firebase";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+
 function Chat() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -182,10 +183,11 @@ function Chat() {
   return (
     <div className="flex flex-col">
       <div className="flex">
-      <a href="https://cartoonapp.netlify.app" className="text-white text-lg w-50">
-        Back
+     
+      <img className="w-10 mr-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
+      <a href="https://cartoonapp.netlify.app" className="text-white text-4xl font-bold">
+        X
       </a>
-      <img className="w-10 ml-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
       </div>
      
   
