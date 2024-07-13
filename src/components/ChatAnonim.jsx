@@ -180,12 +180,12 @@ function Chat() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex flex-col">
       <div className="flex">
       <a href="https://cartoonapp.netlify.app" className="text-white text-lg w-50">
         Back
       </a>
-      <img className="w-10 ml-auto mb-10" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
+      <img className="w-10 ml-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
       </div>
      
   
