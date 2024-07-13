@@ -337,9 +337,8 @@ body {
 }
 
 #ChatAnonim_lg {
-	background: #171C28C4;
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(6.9px);
+	background: #171c28;
+	
 	border-radius: 0pt;
 
 	
@@ -367,9 +366,9 @@ body {
 }
 
 #KotakPesan {
-	background: transparent;
+	background: #171c28;
 	height: 65vh;
-	backdrop-filter: blur(7px);
+	
 	
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
