@@ -399,7 +399,8 @@ r-track {
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);
 	border: 1px solid rgba(255, 255, 255, 0.09);
-	padding: 16px;
+	padding: 20px 15px;
+	width: 110%;
 }
 
 /* Menghilangkan outline putih saat input dalam fokus */
