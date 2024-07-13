@@ -182,7 +182,7 @@ const Chat = () => {
       <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
         {messages.map((msg, index) => (
           <div key={index} className="flex items-start text-sm py-1">
-            <img src={msg.sender.image} alt="User Profile" className="h-10 w-10 mr-2 mt-8" />
+            <img src={msg.sender.image} alt="User Profile" className="h-8 w-8 mr-2 mt-8" />
             <div className="relative top-[0.30rem] text-white bg-black-message">
               <p className="text-base">{msg.message}</p>
               <p className="text-xs text-gray-400 mt-1">{formatTimestamp(msg.timestamp)}</p>

@@ -328,11 +328,11 @@ body {
   }
   
 .modal-container {
-	max-width: auto;
+	width: 100%;
 }
 
 #modal-container-chat {
-	width: 90%;
+	width: 100%;
 	border-radius: 30pt;
 }
 
