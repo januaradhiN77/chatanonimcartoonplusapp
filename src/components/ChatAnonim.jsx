@@ -190,7 +190,7 @@ function Chat() {
      
   
       <div className="text-center text-4xl font-semibold text-white mb-50">
-        Chat Random
+        Chat Publik
       </div>
   
       <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
