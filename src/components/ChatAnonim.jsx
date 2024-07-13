@@ -137,7 +137,7 @@ function Chat() {
       const trimmedMessage = message.trim().substring(0, 60);
       const userIpAddress = userIp;
 
-      if (messageCount >= 20) { 
+      if (messageCount >= 1000) { 
         Swal.fire({
           icon: "error",
           title: "Message limit exceeded",
