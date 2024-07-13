@@ -173,9 +173,6 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex">
-        <img className="w-10 mr-auto mb-50" src="https://cartoonapp.netlify.app/asset/cplus_logo.png" alt="Logo"/>
-      </div>
       <div className="text-center text-4xl font-semibold text-white mb-50">
         Chat Publik
       </div>
