@@ -383,7 +383,8 @@ body {
 }
 
 /* Gaya untuk track scrollbar */
-#KotakPesan::-webkit-scrollbar-track {
+#KotakPesan::-webkit-scrollba
+r-track {
 	background-color: transparent; /* Warna track scrollbar */
 }
 
