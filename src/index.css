@@ -367,14 +367,14 @@ body {
 }
 
 #KotakPesan {
-	background: #232835c4;
+	background: transparent;
 	height: 65vh;
 	backdrop-filter: blur(7px);
-	border-radius: 20pt;
+	
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);
-	width:125%;
+	width:135%;
 	padding: 15px;
 	margin-left: -39px;
 	scrollbar-width: thin; /* Lebar scrollbar */
