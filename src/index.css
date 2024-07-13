@@ -165,10 +165,10 @@ body {
 	height: auto;
 	width: 100%;
 	margin-top: 5%;
-	border-radius: 15pt;
+	border-radius: 0pt;
 	/* From https://css.glass */
 	background: rgba(255, 255, 255, 0.14);
-	border-radius: 16px;
+	border-radius: 0px;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(6.9px);
 	-webkit-backdrop-filter: blur(6.9px);
@@ -333,8 +333,8 @@ body {
 }
 
 #ChatAnonim_lg {
-	background: rgba(255, 255, 255, 0.14);
-	border-radius: 30pt;
+	background:  #171C28C4;;
+	border-radius: 0pt;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);
@@ -363,15 +363,15 @@ body {
 }
 
 #KotakPesan {
-	background: rgba(255, 255, 255, 0.14);
-	height: 40vh;
-
+	background: #232835c4;
+	height: 70vh;
+	backdrop-filter: blur(7px);
 	border-radius: 20pt;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);
 	border: 1px solid rgba(255, 255, 255, 0.09);
-	padding: 16px;
+	padding: 15px;
 	scrollbar-width: thin; /* Lebar scrollbar */
 	scrollbar-color: transparent; /* Warna scrollbar (track, thumb) */
 }
@@ -388,8 +388,8 @@ body {
 }
 
 #InputChat {
-	background: rgba(255, 255, 255, 0.14);
-	border-radius: 40pt;
+	background: #232835c4;
+	border-radius: 20pt;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);

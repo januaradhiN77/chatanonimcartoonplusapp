@@ -180,23 +180,32 @@ function Chat() {
   };
 
   return (
-    <div className="" id="ChatAnonim">
-      <div className="text-center text-4xl font-semibold" id="Glow">
-        Pesan Anonim
+    <div className="h-screen flex flex-col">
+      <div className="flex">
+      <a href="https://cartoonapp.netlify.app" className="text-white text-lg w-50">
+        Back
+      </a>
+      <img className="w-10 ml-auto mb-10" src="https://cartoonapp.netlify.app/asset/cplus_logo.png"></img>
       </div>
-
-      <div className="mt-5" id="KotakPesan" style={{ overflowY: "auto" }}>
+     
+  
+      <div className="text-center text-4xl font-semibold text-white mb-50">
+        Chat Random
+      </div>
+  
+      <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
         {messages.map((msg, index) => (
-          <div key={index} className="flex items-start text-sm py-[1%]">
-            <img src={msg.sender.image} alt="User Profile" className="h-7 w-7 mr-2 " />
-            <div className="relative top-[0.30rem]">{msg.message}</div>
+          <div key={index} className="flex items-start text-sm py-1">
+            <img src={msg.sender.image} alt="User Profile" className="h-7 w-7 mr-2" />
+            <div className="relative top-[0.30rem] text-white">{msg.message}</div>
           </div>
         ))}
         <div ref={messagesEndRef}></div>
       </div>
-      <div id="InputChat" className="flex items-center mt-5">
+  
+      <div id="InputChat" className="flex items-center text-white px-4 mt-5">
         <input
-          className="bg-transparent flex-grow pr-4 w-4 placeholder:text-white placeholder:opacity-60"
+          className="bg-transparent flex-grow w-4 placeholder:text-white placeholder-opacity-60"
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -208,8 +217,12 @@ function Chat() {
           <img src="/paper-plane.png" alt="" className="h-4 w-4 lg:h-6 lg:w-6" />
         </button>
       </div>
+  
+    
     </div>
   );
+  
+  
 }
 
 export default Chat;

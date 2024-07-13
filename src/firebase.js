@@ -7,15 +7,14 @@ import {getAuth, GoogleAuthProvider} from 'firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDqXiYy-Ztr8KEmY1TOptV_k3sUCSC1FBs",
-  authDomain: "xtkj2database.firebaseapp.com",
-  projectId: "xtkj2database",
-  storageBucket: "xtkj2database.appspot.com",
-  messagingSenderId: "568446372958",
-  appId: "1:568446372958:web:e74d3674634786826db8cf",
-  measurementId: "G-WQX40JZ709"
+  apiKey: "AIzaSyCxkV1s7mJ7IJp4JSI35RBGitUwV3GbPk4",
+  authDomain: "chatanonim-1ce68.firebaseapp.com",
+  projectId: "chatanonim-1ce68",
+  storageBucket: "chatanonim-1ce68.appspot.com",
+  messagingSenderId: "132513460666",
+  appId: "1:132513460666:web:2c570a51288d76e8732d83",
+  measurementId: "G-50W8NWDFLV"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
