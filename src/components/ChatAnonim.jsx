@@ -201,7 +201,7 @@ const Chat = () => {
     />
   </div>
   <button onClick={sendMessage} id="send" className="ml-2 bg-transparent w-full placeholder:text-white placeholder-opacity-60">
-    <img src="/paper-plane.png" alt="Send" className="h-7 w-7 lg:h-6 lg:w-6 color-white" />
+    <img src="/paper-plane.png" alt="Send" className="h-6 w-6 lg:h-6 lg:w-6 color-white" />
   </button>
 </div>
 
