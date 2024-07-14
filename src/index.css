@@ -374,7 +374,7 @@ body {
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);
 	width:135%;
-	padding: 5px 20px;
+	padding: 10px 20px;
 	margin-left: -39px;
 	scrollbar-width: thin; /* Lebar scrollbar */
 	scrollbar-color: transparent; /* Warna scrollbar (track, thumb) */
