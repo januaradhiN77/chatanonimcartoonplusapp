@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { addDoc, collection, query, orderBy, onSnapshot, getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase";
@@ -193,11 +194,11 @@ const Chat = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Ketik pesan kamu..."
+          placeholder="Ketik pesan..."
           maxLength={60}
         />
         <button onClick={sendMessage} className="ml-2">
-          <img src="/paper-plane.png" alt="Send" className="h-4 w-4 lg:h-6 lg:w-6" />
+          <img src="/paper-plane.png" alt="Send" className="h-7 w-7 lg:h-6 lg:w-6" />
         </button>
       </div>
     </div>

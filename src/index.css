@@ -321,7 +321,7 @@ body {
 .bg-black-message {
 	background-color: #101220f1;
 	padding: 20px 10px;
-	border-radius: 15px 15px 15px 0px;
+	border-radius: 20px 20px 20px 0px;
 	width: 95%;
 	
 	word-wrap: break-word;
@@ -367,7 +367,7 @@ body {
 
 #KotakPesan {
 	background: #171c28;
-	height: 65vh;
+	height: 69vh;
 	
 	
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -393,7 +393,7 @@ r-track {
 }
 
 #InputChat {
-	background: #232835c4;
+	background: #1f2229;
 	border-radius: 20pt;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
