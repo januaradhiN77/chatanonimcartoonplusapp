@@ -401,7 +401,7 @@ r-track {
 	-webkit-backdrop-filter: blur(6.9px);
 	border: 1px solid rgba(255, 255, 255, 0.09);
 	padding: 20px 15px;
-	width: 110%;
+	width: 115%;
 	
 }
 #send {
@@ -411,8 +411,8 @@ r-track {
 	backdrop-filter: blur(10px);
 	-webkit-backdrop-filter: blur(6.9px);
 	border: 1px solid rgba(255, 255, 255, 0.09);
-	padding: 15px  20px;
-	width: 50%;
+	padding: 20px  15px;
+	width: 47%;
 	margin-left: 10px;
 	justify-content:center;
 	align-items:center;
