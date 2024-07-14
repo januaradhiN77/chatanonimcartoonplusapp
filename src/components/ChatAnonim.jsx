@@ -187,20 +187,25 @@ const Chat = () => {
         ))}
         <div ref={messagesEndRef}></div>
       </div>
-      <div id="InputChat" className="flex items-center text-white px-4 mt-3">
-        <input
-          className="bg-transparent flex-grow w-10 placeholder:text-white placeholder-opacity-60"
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Ketik pesan..."
-          maxLength={60}
-        />
-        <button onClick={sendMessage} className="ml-2">
-          <img src="/paper-plane.png" alt="Send" className="h-7 w-7 lg:h-6 lg:w-6" />
-        </button>
-      </div>
+      
+      <div className="flex items-center text-white px-4 mt-3 ml-7" >
+  <div id="InputChat" className="flex-grow">
+    <input
+      className="bg-transparent w-full placeholder:text-white placeholder-opacity-60"
+      type="text"
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      onKeyPress={handleKeyPress}
+      placeholder="Ketik pesan..."
+      maxLength={60}
+    />
+  </div>
+  <button onClick={sendMessage} id="send" className="ml-2 bg-transparent w-full placeholder:text-white placeholder-opacity-60">
+    <img src="/paper-plane.png" alt="Send" className="h-7 w-7 lg:h-6 lg:w-6 color-white" />
+  </button>
+</div>
+
+
     </div>
   );
 }
