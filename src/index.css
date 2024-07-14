@@ -321,7 +321,7 @@ body {
 .bg-black-message {
 	background-color: #101220f1;
 	padding: 20px 10px;
-	border-radius: 8px;
+	border-radius: 15px 15px 15px 0px;
 	width: 95%;
 	
 	word-wrap: break-word;
