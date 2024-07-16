@@ -227,9 +227,9 @@ const Chat = () => {
             {messages.map((msg, index) => (
               <div key={index} className="flex items-start text-sm py-1">
                 <img src={msg.sender.image} alt="User Profile" className="h-8 w-8 mr-2 mt-8" />
-                <div className="relative top-[0.30rem] text-white bg-black-message">
+                <div className="relative top-[0.20rem] text-white bg-black-message">
                   <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
-                  <p className="text-base text-gray-400">{msg.message}</p>
+                  <p className="text-base mt-2 text-gray-400">{msg.message}</p>
                   <p className="text-xs text-gray-400 mt-1">{formatTimestamp(msg.timestamp)}</p>
                 </div>
               </div>

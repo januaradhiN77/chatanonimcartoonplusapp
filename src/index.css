@@ -405,7 +405,7 @@ r-track {
 	margin-left: -8px;
 }
 #textSizeName{
-	font-size: 16px;
+	font-size: 18px;
 }
 #InputName {
 	background: #232835c4;
@@ -417,7 +417,7 @@ r-track {
 	padding: 20px 15px;
 	width: 100%;
 	margin-left: 0px;
-	margin-top:250px;
+	margin-top:300px;
 }
 #send {
 	background: #232835c4;
