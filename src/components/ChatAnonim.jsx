@@ -159,7 +159,7 @@ const Chat = () => {
       Swal.fire({
         icon: "warning",
         title: "Warning",
-        text: "Isi pesannya dong :)",
+        text: "Jangan spam ya, tunggu 3 detik :)",
         customClass: {
           container: "sweet-alert-container",
         },
