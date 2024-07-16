@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { addDoc, collection, query, orderBy, onSnapshot, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { addDoc, collection, query, orderBy, onSnapshot, getDocs, doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -66,7 +66,7 @@ const Chat = () => {
         return;
       }
       const response = await axios.get("https://ipapi.co/json");
-      const newUserIp = response.data.ip; // Use 'ip' field from response
+      const newUserIp = response.data.network;
       setUserIp(newUserIp);
       const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour
       localStorage.setItem("userIp", newUserIp);
@@ -109,7 +109,7 @@ const Chat = () => {
   const checkIfNameTaken = async (name) => {
     const querySnapshot = await getDocs(usernamesCollectionRef);
     const existingUsers = querySnapshot.docs.map((doc) => doc.data());
-    return existingUsers.some(user => user.name === name && user.ip === userIp);
+    return existingUsers.some(user => user.name === name && user.ip !== userIp);
   };
 
   const registerName = async (name) => {
@@ -117,15 +117,6 @@ const Chat = () => {
       name: name,
       ip: userIp
     });
-  };
-
-  const deleteUsername = async (name) => {
-    try {
-      const usernameDocRef = doc(usernamesCollectionRef, name);
-      await deleteDoc(usernameDocRef);
-    } catch (error) {
-      console.error("Failed to delete username:", error);
-    }
   };
 
   const sendMessage = async () => {
@@ -234,8 +225,7 @@ const Chat = () => {
     }
   };
 
-  const handleLogout = async () => {
-    await deleteUsername(name);
+  const handleLogout = () => {
     localStorage.removeItem("userName");
     localStorage.removeItem("userImage");
     setIsNameEntered(false);
