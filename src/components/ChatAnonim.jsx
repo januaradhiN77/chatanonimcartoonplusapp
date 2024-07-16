@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { addDoc, collection, query, orderBy, onSnapshot, getDocs } from "firebase/firestore";
+import { addDoc, collection, query, orderBy, onSnapshot, getDocs, doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -16,6 +16,7 @@ const Chat = () => {
   const [isSendingMessage, setIsSendingMessage] = useState(false);
 
   const chatsCollectionRef = collection(db, "chats");
+  const usernamesCollectionRef = collection(db, "usernames");
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -105,6 +106,19 @@ const Chat = () => {
     return blockedIPs.includes(userIp);
   };
 
+  const checkIfNameTaken = async (name) => {
+    const querySnapshot = await getDocs(usernamesCollectionRef);
+    const existingUsers = querySnapshot.docs.map((doc) => doc.data());
+    return existingUsers.some(user => user.name === name && user.ip !== userIp);
+  };
+
+  const registerName = async (name) => {
+    await setDoc(doc(usernamesCollectionRef, name), {
+      name: name,
+      ip: userIp
+    });
+  };
+
   const sendMessage = async () => {
     if (message.trim() !== "" && name.trim() !== "" && !isSendingMessage) {
       setIsSendingMessage(true);
@@ -179,7 +193,7 @@ const Chat = () => {
     }
   };
 
-  const handleNameSubmit = () => {
+  const handleNameSubmit = async () => {
     if (name.trim() === "") {
       Swal.fire({
         icon: "warning",
@@ -190,11 +204,24 @@ const Chat = () => {
         },
       });
     } else {
-      localStorage.setItem("userName", name);
-      if (selectedImage) {
-        localStorage.setItem("userImage", selectedImage);
+      const nameTaken = await checkIfNameTaken(name);
+      if (nameTaken) {
+        Swal.fire({
+          icon: "error",
+          title: "Nama sudah dipakai",
+          text: "Nama ini sudah dipakai oleh pengguna lain, silakan pilih nama lain.",
+          customClass: {
+            container: "sweet-alert-container",
+          },
+        });
+      } else {
+        await registerName(name);
+        localStorage.setItem("userName", name);
+        if (selectedImage) {
+          localStorage.setItem("userImage", selectedImage);
+        }
+        setIsNameEntered(true);
       }
-      setIsNameEntered(true);
     }
   };
 
@@ -295,4 +322,3 @@ const Chat = () => {
 };
 
 export default Chat;
-
