@@ -257,7 +257,7 @@ const Chat = () => {
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
               <div key={index} className="flex items-start text-sm py-1 bg-black-message">
-                <img src={msg.sender.image} alt="User Profile" className="h-10 w-10 ml-2 mt-0 rounded-full" />
+                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 ml-2 mt-0 rounded-full" />
                 <div className="relative top-[0.30rem] text-white ml-5">
                   <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
                   <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
