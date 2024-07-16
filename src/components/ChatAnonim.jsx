@@ -12,6 +12,7 @@ const Chat = () => {
   const [userIp, setUserIp] = useState("");
   const [messageCount, setMessageCount] = useState(0);
   const [isNameEntered, setIsNameEntered] = useState(false);
+  const [isSendingMessage, setIsSendingMessage] = useState(false); // State untuk menandai sedang mengirim pesan
 
   const chatsCollectionRef = collection(db, "chats");
   const messagesEndRef = useRef(null);
@@ -100,7 +101,9 @@ const Chat = () => {
   };
 
   const sendMessage = async () => {
-    if (message.trim() !== "" && name.trim() !== "") {
+    if (message.trim() !== "" && name.trim() !== "" && !isSendingMessage) {
+      setIsSendingMessage(true); // Menandai sedang mengirim pesan
+
       const isBlocked = await isIpBlocked();
 
       if (isBlocked) {
@@ -112,6 +115,7 @@ const Chat = () => {
             container: "sweet-alert-container",
           },
         });
+        setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
         return;
       }
 
@@ -128,6 +132,7 @@ const Chat = () => {
             container: "sweet-alert-container",
           },
         });
+        setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
         return;
       }
 
@@ -148,7 +153,8 @@ const Chat = () => {
       setMessage("");
       setTimeout(() => {
         setShouldScrollToBottom(true);
-      }, 100);
+        setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
+      }, 3000); // Menunggu 1 detik sebelum mengatur kembali ke false
     } else {
       Swal.fire({
         icon: "warning",
@@ -218,8 +224,8 @@ const Chat = () => {
                 <img src={msg.sender.image} alt="User Profile" className="h-8 w-8 mr-2 mt-8" />
                 <div className="relative top-[0.20rem] text-white bg-black-message">
                   <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
-                  <p className="text-base mt-1 text-gray-400">{msg.message}</p>
-                  <p className="text-xs text-gray-400 mt-3">{formatTimestamp(msg.timestamp)}</p>
+                  <p className="text-base text-gray-400">{msg.message}</p>
+                  <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
               </div>
             ))}
