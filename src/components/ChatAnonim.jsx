@@ -230,7 +230,7 @@ const Chat = () => {
                 <div className="relative top-[0.20rem] text-white bg-black-message">
                   <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
                   <p className="text-base mt-1 text-gray-400">{msg.message}</p>
-                  <p className="text-xs text-gray-400 mt-1">{formatTimestamp(msg.timestamp)}</p>
+                  <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
               </div>
             ))}
