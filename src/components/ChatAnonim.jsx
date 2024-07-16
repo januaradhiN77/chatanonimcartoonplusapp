@@ -248,7 +248,7 @@ const Chat = () => {
       ) : (
         <>
           <div className="flex items-center justify-between">
-            <p  className="text-white  mt-12">Halo, {name}!</p>
+            <p className="text-white mt-12">Halo, {name}!</p>
             <button className="text-white font-bold mt-12 cursor-pointer" onClick={handleLogout}>
               Logout
             </button>
@@ -256,13 +256,18 @@ const Chat = () => {
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
-              <div key={index} className="flex items-start text-sm py-1 bg-black-message">
-                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 ml-2 mt-0 rounded-full" />
-                <div className="relative top-[0.30rem] text-white ml-5">
-                  <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
+              <div key={index} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[100%]`}>
+                {msg.sender.name !== name && (
+                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
+                )}
+                <div className="flex flex-col right-text">
+                  <p id="textSizeName" className="text-white font-bold">{msg.sender.name}</p>
                   <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
                   <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
+                {msg.sender.name === name && (
+                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left" />
+                )}
               </div>
             ))}
             <div ref={messagesEndRef}></div>
@@ -290,3 +295,4 @@ const Chat = () => {
 };
 
 export default Chat;
+
