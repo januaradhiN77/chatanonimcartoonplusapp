@@ -163,8 +163,8 @@ const Chat = () => {
     } else {
       Swal.fire({
         icon: "warning",
-        title: "Name required",
-        text: "Please enter your name before sending a message.",
+        title: "Warning",
+        text: "Isi pesannya dong :)",
         customClass: {
           container: "sweet-alert-container",
         },
