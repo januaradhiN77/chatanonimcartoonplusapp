@@ -249,12 +249,12 @@ const Chat = () => {
         <>
           <div className="flex items-center justify-between">
             <p className="text-white  mt-12">Welcome, {name}!</p>
-            <button className="text-white  mt-12 cursor-pointer" onClick={handleLogout}>
+            <button className="text-white font-bold mt-12 cursor-pointer" onClick={handleLogout}>
               Logout
             </button>
           </div>
 
-          <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
+          <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
               <div key={index} className="flex items-start text-sm py-1 bg-black-message">
                 <img src={msg.sender.image} alt="User Profile" className="h-10 w-10 ml-2 mt-0 rounded-full" />
