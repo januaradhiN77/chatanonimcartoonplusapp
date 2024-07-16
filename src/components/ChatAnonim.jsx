@@ -154,12 +154,12 @@ const Chat = () => {
       setTimeout(() => {
         setShouldScrollToBottom(true);
         setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
-      }, 3000); // Menunggu 1 detik sebelum mengatur kembali ke false
+      }, 2000); // Menunggu 1 detik sebelum mengatur kembali ke false
     } else {
       Swal.fire({
         icon: "warning",
         title: "Warning",
-        text: "Jangan spam ya, tunggu 3 detik :)",
+        text: "Isi pesannya dong :)",
         customClass: {
           container: "sweet-alert-container",
         },
