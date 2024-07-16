@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { addDoc, collection, query, orderBy, onSnapshot, getDocs } from "firebase/firestore";
 import { db, auth } from "../firebase";
@@ -6,11 +5,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const Chat = () => {
+  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [shouldScrollToBottom, setShouldScrollToBottom] = useState(true);
   const [userIp, setUserIp] = useState("");
   const [messageCount, setMessageCount] = useState(0);
+  const [isNameEntered, setIsNameEntered] = useState(false);
 
   const chatsCollectionRef = collection(db, "chats");
   const messagesEndRef = useRef(null);
@@ -20,8 +21,7 @@ const Chat = () => {
     const unsubscribe = onSnapshot(queryChats, (snapshot) => {
       const newMessages = snapshot.docs.map((doc) => ({
         ...doc.data(),
-        id: doc.id, // optionally include the document ID
-        userIp: doc.data().userIp,
+        id: doc.id,
       }));
       setMessages(newMessages);
       if (shouldScrollToBottom) {
@@ -38,6 +38,11 @@ const Chat = () => {
     getUserIp();
     checkMessageCount();
     scrollToBottom();
+    const storedName = localStorage.getItem("userName");
+    if (storedName) {
+      setName(storedName);
+      setIsNameEntered(true);
+    }
   }, []);
 
   const scrollToBottom = () => {
@@ -106,7 +111,7 @@ const Chat = () => {
   };
 
   const sendMessage = async () => {
-    if (message.trim() !== "") {
+    if (message.trim() !== "" && name.trim() !== "") {
       const isBlocked = await isIpBlocked();
 
       if (isBlocked) {
@@ -144,6 +149,7 @@ const Chat = () => {
       await addDoc(chatsCollectionRef, {
         message: trimmedMessage,
         sender: {
+          name: name,
           image: senderImageURL,
         },
         timestamp: new Date(),
@@ -154,6 +160,15 @@ const Chat = () => {
       setTimeout(() => {
         setShouldScrollToBottom(true);
       }, 100);
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "Name required",
+        text: "Please enter your name before sending a message.",
+        customClass: {
+          container: "sweet-alert-container",
+        },
+      });
     }
   };
 
@@ -164,8 +179,24 @@ const Chat = () => {
     }
   };
 
+  const handleNameSubmit = () => {
+    if (name.trim() === "") {
+      Swal.fire({
+        icon: "warning",
+        title: "Name diperlukan",
+        text: "Tolong isi nama kamu untuk melanjutkan.",
+        customClass: {
+          container: "sweet-alert-container",
+        },
+      });
+    } else {
+      localStorage.setItem("userName", name);
+      setIsNameEntered(true);
+    }
+  };
+
   const formatTimestamp = (timestamp) => {
-    const date = timestamp.toDate(); // Convert Firestore timestamp to JavaScript Date object
+    const date = timestamp.toDate();
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     const formattedDate = date.toLocaleDateString('en-US', options);
     const formattedTime = `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
@@ -174,38 +205,56 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col justify-center">
-     
-      <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
-        {messages.map((msg, index) => (
-          <div key={index} className="flex items-start text-sm py-1">
-            <img src={msg.sender.image} alt="User Profile" className="h-8 w-8 mr-2 mt-8" />
-            <div className="relative top-[0.30rem] text-white bg-black-message">
-              <p className="text-base">{msg.message}</p>
-              <p className="text-xs text-gray-400 mt-1">{formatTimestamp(msg.timestamp)}</p>
-            </div>
+      {!isNameEntered ? (
+        <div id="InputName" className="flex flex-col items-center mt-5">
+          <input
+            className="bg-transparent text-white placeholder-opacity-60 placeholder-white mb-2"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Masukkan nama kamu..."
+          />
+          <button
+            id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
+            onClick={handleNameSubmit}
+          >
+            Lanjut
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
+            {messages.map((msg, index) => (
+              <div key={index} className="flex items-start text-sm py-1">
+                <img src={msg.sender.image} alt="User Profile" className="h-8 w-8 mr-2 mt-8" />
+                <div className="relative top-[0.30rem] text-white bg-black-message">
+                  <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
+                  <p className="text-base text-gray-400">{msg.message}</p>
+                  <p className="text-xs text-gray-400 mt-1">{formatTimestamp(msg.timestamp)}</p>
+                </div>
+              </div>
+            ))}
+            <div ref={messagesEndRef}></div>
           </div>
-        ))}
-        <div ref={messagesEndRef}></div>
-      </div>
-      
-      <div className="flex items-center text-white mt-3 w-100 ml-7" >
-  <div id="InputChat" className="flex-grow">
-    <input
-      className="bg-transparent w-full placeholder:text-white placeholder-opacity-60"
-      type="text"
-      value={message}
-      onChange={(e) => setMessage(e.target.value)}
-      onKeyPress={handleKeyPress}
-      placeholder="Ketik pesan..."
-      maxLength={60}
-    />
-  </div>
-  <button onClick={sendMessage} id="send" className="ml-2 bg-transparent w-full placeholder:text-white placeholder-opacity-60">
-    <img src="/paper-plane.png" alt="Send" className="h-5 w-5 lg:h-6 lg:w-6 color-white" />
-  </button>
-</div>
 
-
+          <div className="flex items-center text-white mt-3 w-100 ml-7">
+            <div id="InputChat" className="flex-grow">
+              <input
+                className="bg-transparent w-full placeholder:text-white placeholder-opacity-60"
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Ketik pesan..."
+                maxLength={60}
+              />
+            </div>
+            <button onClick={sendMessage} id="send" className="ml-2 bg-black p-2 rounded">
+              <img src="/paper-plane.png" alt="Send" className="h-5 w-5 lg:h-6 lg:w-6 filter invert" />
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

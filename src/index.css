@@ -404,6 +404,21 @@ r-track {
 	width: 550%;
 	margin-left: -8px;
 }
+#textSizeName{
+	font-size: 16px;
+}
+#InputName {
+	background: #232835c4;
+	border-radius: 15px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(6.9px);
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	padding: 20px 15px;
+	width: 100%;
+	margin-left: 0px;
+	margin-top:250px;
+}
 #send {
 	background: #232835c4;
 	border-radius: 15px;
@@ -413,6 +428,21 @@ r-track {
 	border: 1px solid rgba(255, 255, 255, 0.09);
 	height: 60px;
 	width: 490px;
+	margin-left: 10px;
+	justify-content:center;
+	align-items:center;
+	text-align:center;
+	display: flex;
+}
+#sendSumbit {
+	background: #232835c4;
+	border-radius: 15px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(6.9px);
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	height: 60px;
+	width: 100px;
 	margin-left: 10px;
 	justify-content:center;
 	align-items:center;
