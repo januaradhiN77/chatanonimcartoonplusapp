@@ -230,7 +230,7 @@ const Chat = () => {
       {!isNameEntered ? (
         <div id="InputName" className="flex flex-col items-center mt-5">
           <input
-            className="bg-transparent text-white placeholder-opacity-60 placeholder-white mb-2 items-center"
+            className="bg-transparent text-white placeholder-opacity-60 placeholder-white mb-2 justify-center"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
