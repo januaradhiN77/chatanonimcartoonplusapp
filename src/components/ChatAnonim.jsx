@@ -228,7 +228,7 @@ const Chat = () => {
   return (
     <div className="flex flex-col justify-center">
       {!isNameEntered ? (
-        <div id="InputName" className="flex flex-col items-center mt-5">
+        <div id="InputName" className="flex flex-col justify-center items-center mt-5">
           <input
             className="bg-transparent text-white placeholder-opacity-60 placeholder-white mb-2 justify-center"
             type="text"
