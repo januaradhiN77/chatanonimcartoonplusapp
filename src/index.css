@@ -329,6 +329,7 @@ body {
 	border: 1px solid rgba(255, 255, 255, 0.09);
 	border-radius: 25px 25px 25px 0px;
 	width: 90%;
+	word-break: break-word;
 	margin-top: 10px;
 	display: flex;
 	align-items: center;
@@ -355,6 +356,8 @@ body {
 	align-items: center;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	word-wrap: break-word;
+	
+	word-break: break-word;
   }
 .modal-container {
 	max-width: auto;

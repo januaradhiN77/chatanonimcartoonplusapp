@@ -256,7 +256,7 @@ const Chat = () => {
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
-              <div key={index} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[100%]`}>
+              <div key={index} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
                 {msg.sender.name !== name && (
                   <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
                 )}
