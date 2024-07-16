@@ -12,7 +12,8 @@ const Chat = () => {
   const [userIp, setUserIp] = useState("");
   const [messageCount, setMessageCount] = useState(0);
   const [isNameEntered, setIsNameEntered] = useState(false);
-  const [isSendingMessage, setIsSendingMessage] = useState(false); // State untuk menandai sedang mengirim pesan
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
 
   const chatsCollectionRef = collection(db, "chats");
   const messagesEndRef = useRef(null);
@@ -40,9 +41,13 @@ const Chat = () => {
     checkMessageCount();
     scrollToBottom();
     const storedName = localStorage.getItem("userName");
+    const storedImage = localStorage.getItem("userImage");
     if (storedName) {
       setName(storedName);
       setIsNameEntered(true);
+    }
+    if (storedImage) {
+      setSelectedImage(storedImage);
     }
   }, []);
 
@@ -102,7 +107,7 @@ const Chat = () => {
 
   const sendMessage = async () => {
     if (message.trim() !== "" && name.trim() !== "" && !isSendingMessage) {
-      setIsSendingMessage(true); // Menandai sedang mengirim pesan
+      setIsSendingMessage(true);
 
       const isBlocked = await isIpBlocked();
 
@@ -115,11 +120,11 @@ const Chat = () => {
             container: "sweet-alert-container",
           },
         });
-        setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
+        setIsSendingMessage(false);
         return;
       }
 
-      const senderImageURL = auth.currentUser?.photoURL || "/AnonimUser.png";
+      const senderImageURL = selectedImage || auth.currentUser?.photoURL || "/AnonimUser.png";
       const trimmedMessage = message.trim();
       const userIpAddress = userIp;
 
@@ -132,7 +137,7 @@ const Chat = () => {
             container: "sweet-alert-container",
           },
         });
-        setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
+        setIsSendingMessage(false);
         return;
       }
 
@@ -153,8 +158,8 @@ const Chat = () => {
       setMessage("");
       setTimeout(() => {
         setShouldScrollToBottom(true);
-        setIsSendingMessage(false); // Mengatur kembali ke false setelah selesai
-      }, 2000); // Menunggu 1 detik sebelum mengatur kembali ke false
+        setIsSendingMessage(false);
+      }, 2000);
     } else {
       Swal.fire({
         icon: "warning",
@@ -186,15 +191,37 @@ const Chat = () => {
       });
     } else {
       localStorage.setItem("userName", name);
+      if (selectedImage) {
+        localStorage.setItem("userImage", selectedImage);
+      }
       setIsNameEntered(true);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userImage");
+    setIsNameEntered(false);
+    setName("");
+    setSelectedImage(null);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedImage(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
     }
   };
 
   const formatTimestamp = (timestamp) => {
     const date = timestamp.toDate();
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString('en-US', options);
-    const formattedTime = `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    const formattedTime = `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
     return `${formattedDate} ${formattedTime}`;
   };
 
@@ -209,6 +236,8 @@ const Chat = () => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Masukkan nama kamu..."
           />
+          <p className="text-white font-bold mt-5">Pilih gambar untuk profil (opsional)</p>
+          <input type="file" onChange={handleImageChange} className="mb-2 text-white mt-2" />
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
@@ -218,13 +247,20 @@ const Chat = () => {
         </div>
       ) : (
         <>
+          <div className="flex items-center justify-between mt-5">
+            <p className="text-white">Welcome, {name}!</p>
+            <button className="text-white underline cursor-pointer" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+
           <div className="mt-5 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
-              <div key={index} className="flex items-start text-sm py-1">
-                <img src={msg.sender.image} alt="User Profile" className="h-8 w-8 mr-2 mt-8" />
-                <div className="relative top-[0.20rem] text-white bg-black-message">
+              <div key={index} className="flex items-start text-sm py-1 bg-black-message">
+                <img src={msg.sender.image} alt="User Profile" className="h-10 w-10 ml-2 mt-0 rounded-full" />
+                <div className="relative top-[0.30rem] text-white ml-5">
                   <p id="textSizeName" className="font-bold">{msg.sender.name}</p>
-                  <p className="text-base text-gray-400">{msg.message}</p>
+                  <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
                   <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
               </div>
@@ -251,6 +287,6 @@ const Chat = () => {
       )}
     </div>
   );
-}
+};
 
 export default Chat;
