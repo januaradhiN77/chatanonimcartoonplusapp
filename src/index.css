@@ -117,7 +117,12 @@ body {
 #BoxGallery Img {
 	filter: brightness(0) invert(1);
 }
-
+#backgroundHeader{
+	backdrop-filter: blur(7px);
+	background-color: #0F131DCF;
+	width: 125%;
+	margin-left: -25px;
+}
 #BoxOldWeb {
 	padding: 10%;
 	height: auto;
