@@ -66,7 +66,7 @@ const Chat = () => {
         return;
       }
       const response = await axios.get("https://ipapi.co/json");
-      const newUserIp = response.data.network;
+      const newUserIp = response.data.ip; // Use 'ip' field from response
       setUserIp(newUserIp);
       const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour
       localStorage.setItem("userIp", newUserIp);
@@ -109,7 +109,7 @@ const Chat = () => {
   const checkIfNameTaken = async (name) => {
     const querySnapshot = await getDocs(usernamesCollectionRef);
     const existingUsers = querySnapshot.docs.map((doc) => doc.data());
-    return existingUsers.some(user => user.name === name && user.ip !== userIp);
+    return existingUsers.some(user => user.name === name && user.ip === userIp);
   };
 
   const registerName = async (name) => {
