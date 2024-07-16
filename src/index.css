@@ -332,12 +332,13 @@ body {
 	word-break: break-word;
 	margin-top: 10px;
 	display: flex;
-	align-items: center;
+	
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	word-wrap: break-word;
   }
   .left{
 	margin-left:auto;
+	
   }
   .right-text{
 	margin-left: 10px;
@@ -353,7 +354,7 @@ body {
 	display: flex;
 	margin-right: 4px;
 	justify-content: left;
-	align-items: center;
+	
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	word-wrap: break-word;
 	
