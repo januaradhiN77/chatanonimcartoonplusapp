@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { addDoc, collection, query, orderBy, onSnapshot, getDocs, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, query, orderBy, onSnapshot, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -119,6 +119,15 @@ const Chat = () => {
     });
   };
 
+  const deleteUsername = async (name) => {
+    try {
+      const usernameDocRef = doc(usernamesCollectionRef, name);
+      await deleteDoc(usernameDocRef);
+    } catch (error) {
+      console.error("Failed to delete username:", error);
+    }
+  };
+
   const sendMessage = async () => {
     if (message.trim() !== "" && name.trim() !== "" && !isSendingMessage) {
       setIsSendingMessage(true);
@@ -225,7 +234,8 @@ const Chat = () => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await deleteUsername(name);
     localStorage.removeItem("userName");
     localStorage.removeItem("userImage");
     setIsNameEntered(false);
