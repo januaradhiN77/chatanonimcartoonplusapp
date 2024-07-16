@@ -247,9 +247,9 @@ const Chat = () => {
         </div>
       ) : (
         <>
-          <div id="backgroundHeader" className="flex items-center justify-between">
-            <p  className="text-white ml-10 mt-12">Halo, {name}!</p>
-            <button className="mr-10 text-white font-bold mt-12 cursor-pointer" onClick={handleLogout}>
+          <div className="flex items-center justify-between">
+            <p  className="text-white  mt-12">Halo, {name}!</p>
+            <button className="text-white font-bold mt-12 cursor-pointer" onClick={handleLogout}>
               Logout
             </button>
           </div>
