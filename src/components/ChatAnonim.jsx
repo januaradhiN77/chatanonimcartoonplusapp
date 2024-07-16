@@ -87,18 +87,7 @@ const Chat = () => {
 
     if (currentDate === storedDateString) {
       const userSentMessageCount = parseInt(localStorage.getItem(userIpAddress)) || 0;
-      if (userSentMessageCount >= 1000) {
-        Swal.fire({
-          icon: "error",
-          title: "Message limit exceeded",
-          text: "You have reached the message limit for today. Try again later.",
-          customClass: {
-            container: "sweet-alert-container",
-          },
-        });
-      } else {
-        setMessageCount(userSentMessageCount);
-      }
+      setMessageCount(userSentMessageCount);
     } else {
       localStorage.removeItem(userIpAddress);
       localStorage.setItem("messageCountDate", currentDate);
@@ -127,7 +116,7 @@ const Chat = () => {
       }
 
       const senderImageURL = auth.currentUser?.photoURL || "/AnonimUser.png";
-      const trimmedMessage = message.trim().substring(0, 50);
+      const trimmedMessage = message.trim();
       const userIpAddress = userIp;
 
       if (messageCount >= 1000) {
@@ -246,7 +235,6 @@ const Chat = () => {
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Ketik pesan..."
-                maxLength={60}
               />
             </div>
             <button onClick={sendMessage} id="send" className="ml-2 bg-black p-2 rounded">
