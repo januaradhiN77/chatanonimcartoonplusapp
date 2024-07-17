@@ -19,6 +19,8 @@ const Chat = () => {
   const usernamesCollectionRef = collection(db, "usernames");
   const messagesEndRef = useRef(null);
 
+  const adminNames = ["Januarzzz", "bukan kafka", "Admin3"]; // Tambahkan nama pengguna admin lainnya di sini
+
   useEffect(() => {
     const queryChats = query(chatsCollectionRef, orderBy("timestamp"));
     const unsubscribe = onSnapshot(queryChats, (snapshot) => {
@@ -308,14 +310,14 @@ const Chat = () => {
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
-              <div className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
+              <div className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`} key={index}>
               {msg.sender.name !== name && (
-                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
+                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2 imgBorder"  />
               )}
               <div className="flex flex-col right-text">
                 <div className="flex items-center">
                   <p id="textSizeName" className="text-white font-bold">{msg.sender.name}</p>
-                  {msg.sender.name === "Januarzzz" && (
+                  {adminNames.includes(msg.sender.name) && (
                     <img src="/adminIcon.png" alt="Admin Verification Icon" className="h-4 w-4 ml-1" />
                   )}
                 </div>
@@ -323,7 +325,7 @@ const Chat = () => {
                 <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
               </div>
               {msg.sender.name === name && (
-                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left" />
+                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left imgBorder" />
               )}
             </div>
             ))}
