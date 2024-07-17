@@ -7,13 +7,13 @@ import {getAuth, GoogleAuthProvider} from 'firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyClbyF9f_5Je27H94Dq4DBWPdExbAZKT5w",
-  authDomain: "cartoonappchat.firebaseapp.com",
-  projectId: "cartoonappchat",
-  storageBucket: "cartoonappchat.appspot.com",
-  messagingSenderId: "674207415793",
-  appId: "1:674207415793:web:416c420038d990e2c79850",
-  measurementId: "G-WTWJM0M6FG"
+  apiKey: "AIzaSyCtmopdloaAJPjsEp7E1YjeQyocnNnIjVA",
+  authDomain: "cplus-53913.firebaseapp.com",
+  projectId: "cplus-53913",
+  storageBucket: "cplus-53913.appspot.com",
+  messagingSenderId: "234769813033",
+  appId: "1:234769813033:web:effbe37df2e9b99ea29638",
+  measurementId: "G-DH3ZY6PRYP"
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
