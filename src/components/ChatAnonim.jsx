@@ -311,7 +311,7 @@ const Chat = () => {
           <div className="flex items-center justify-between">
             <p className="text-white mt-12">Halo, {name}!</p>
             <button className="text-white font-bold mt-12 cursor-pointer" onClick={toggleProfileModal}>
-              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-10 w-10 rounded-full" />
+              <img src="/AnonimUser.png" alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
             </button>
           </div>
 
