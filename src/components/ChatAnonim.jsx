@@ -35,7 +35,7 @@ const Chat = () => {
     return () => {
       unsubscribe();
     };
-  }, [shouldScrollToBottom]);
+  }, [chatsCollectionRef, shouldScrollToBottom]);
 
   useEffect(() => {
     getUserIp();
@@ -159,21 +159,32 @@ const Chat = () => {
       localStorage.setItem(userIpAddress, updatedSentMessageCount.toString());
       setMessageCount(updatedSentMessageCount);
 
-      await addDoc(chatsCollectionRef, {
-        message: trimmedMessage,
-        sender: {
-          name: name,
-          image: senderImageURL,
-        },
-        timestamp: new Date(),
-        userIp: userIp,
-      });
+      try {
+        await addDoc(chatsCollectionRef, {
+          message: trimmedMessage,
+          sender: {
+            name: name,
+            image: senderImageURL,
+          },
+          timestamp: new Date(),
+          userIp: userIp,
+        });
 
-      setMessage("");
-      setTimeout(() => {
+        setMessage("");
         setShouldScrollToBottom(true);
+      } catch (error) {
+        console.error("Error sending message:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Failed to send message",
+          text: "There was an error sending your message. Please try again later.",
+          customClass: {
+            container: "sweet-alert-container",
+          },
+        });
+      } finally {
         setIsSendingMessage(false);
-      }, 2000);
+      }
     } else {
       Swal.fire({
         icon: "warning",
@@ -294,8 +305,8 @@ const Chat = () => {
           </div>
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
-            {messages.map((msg, index) => (
-              <div key={index} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
+            {messages.map((msg) => (
+              <div key={msg.id} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
                 {msg.sender.name !== name && (
                   <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
                 )}
