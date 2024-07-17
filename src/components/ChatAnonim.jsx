@@ -368,7 +368,6 @@ const Chat = () => {
               {adminNames.includes(name) && (
                 <p className="text-center text-green-500 font-bold">Verified Admin</p>
               )}
-              <p className="text-center text-white">Total messages: {messageCount}</p>
               <button className="logout mt-5 text-white rounded block" onClick={handleLogout}>
                 Logout
               </button>
