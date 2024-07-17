@@ -66,7 +66,7 @@ const Chat = () => {
         return;
       }
       const response = await axios.get("https://ipapi.co/json");
-      const newUserIp = response.data.network;
+      const newUserIp = response.data.network.ip;
       setUserIp(newUserIp);
       const expirationTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour
       localStorage.setItem("userIp", newUserIp);
@@ -308,19 +308,24 @@ const Chat = () => {
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
-              <div key={index} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
-                {msg.sender.name !== name && (
-                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
-                )}
-                <div className="flex flex-col right-text">
+              <div className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
+              {msg.sender.name !== name && (
+                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
+              )}
+              <div className="flex flex-col right-text">
+                <div className="flex items-center">
                   <p id="textSizeName" className="text-white font-bold">{msg.sender.name}</p>
-                  <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
-                  <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
+                  {msg.sender.name === "Januarzzz" && (
+                    <img src="/adminIcon.png" alt="Admin Verification Icon" className="h-4 w-4 ml-1" />
+                  )}
                 </div>
-                {msg.sender.name === name && (
-                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left" />
-                )}
+                <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
+                <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
               </div>
+              {msg.sender.name === name && (
+                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left" />
+              )}
+            </div>
             ))}
             <div ref={messagesEndRef}></div>
           </div>
