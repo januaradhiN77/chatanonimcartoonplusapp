@@ -328,7 +328,7 @@ body {
 	padding: 13px 10px;
 	border: 1px solid rgba(255, 255, 255, 0.09);
 	border-radius: 25px 25px 25px 0px;
-	width: 90%;
+	width: 98%;
 	word-break: break-word;
 	margin-top: 10px;
 	display: flex;
@@ -348,7 +348,7 @@ body {
 	padding: 13px 10px;
 	border: 1px solid rgba(255, 255, 255, 0.09);
 	border-radius: 25px 25px 0px 25px;
-	width: 90%;
+	width: 98%;
 	margin-left: auto;
 	margin-top: 10px;
 	display: flex;
@@ -441,6 +441,7 @@ r-track {
 }
 #textSizeMessage{
 	font-size: 14px;
+	width: 140px;
 }
 #InputName {
 	background: #232835c4;
