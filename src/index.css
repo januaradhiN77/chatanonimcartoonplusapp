@@ -439,12 +439,42 @@ r-track {
 	width: 550%;
 	margin-left: -8px;
 }
+.profile-modal-overlay {
+	background-color: rgba(0, 0, 0, 0.75);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .profile-modal {
+	background: rgba(16, 22, 44, 0.966)e7;
+	border-radius: 10px;
+	padding: 20px;
+	max-width: 400px;
+	width: 80%;
+	outline: none;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	position: absolute;
+	backdrop-filter: blur(5px);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+  
+  .profile-modal-content {
+	text-align: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+  }
+  
+  
 #textSizeName{
 	font-size: 16px;
 }
 #textSizeMessage{
 	font-size: 14px;
-	width: 150px;
+	width: 160px;
 }
 #InputName {
 	background: #232835c4;
@@ -483,6 +513,21 @@ r-track {
 	height: 60px;
 	width: 100px;
 	margin-left: 10px;
+	justify-content:center;
+	align-items:center;
+	text-align:center;
+	display: flex;
+}
+.logout{
+	background: #232835c4;
+	border-radius: 15px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(6.9px);
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	height: 60px;
+	width: 100px;
+	margin-left: 0px;
 	justify-content:center;
 	align-items:center;
 	text-align:center;

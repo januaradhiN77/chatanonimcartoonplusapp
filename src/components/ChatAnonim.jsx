@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Modal from "react-modal";
 import { addDoc, collection, query, orderBy, onSnapshot, getDocs, doc, setDoc } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import axios from "axios";
@@ -14,12 +15,13 @@ const Chat = () => {
   const [isNameEntered, setIsNameEntered] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isSendingMessage, setIsSendingMessage] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const chatsCollectionRef = collection(db, "chats");
   const usernamesCollectionRef = collection(db, "usernames");
   const messagesEndRef = useRef(null);
 
-  const adminNames = ["Januarzzz", "bukan kafka", "Admin3"]; // Tambahkan nama pengguna admin lainnya di sini
+  const adminNames = ["Januarzzz", "bukan kafka", "Admin3"];
 
   useEffect(() => {
     const queryChats = query(chatsCollectionRef, orderBy("timestamp"));
@@ -233,11 +235,12 @@ const Chat = () => {
     setIsNameEntered(false);
     setName("");
     setSelectedImage(null);
+    setIsProfileModalOpen(false);
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-  
+
     if (file) {
       // Pastikan file yang diunggah adalah gambar dengan format yang diizinkan
       if (file.type.startsWith('image/') && ['image/gif', 'image/png', 'image/jpeg'].includes(file.type)) {
@@ -279,6 +282,10 @@ const Chat = () => {
     return `${formattedDate} ${formattedTime}`;
   };
 
+  const toggleProfileModal = () => {
+    setIsProfileModalOpen(!isProfileModalOpen);
+  };
+
   return (
     <div className="flex flex-col justify-center">
       {!isNameEntered ? (
@@ -303,31 +310,31 @@ const Chat = () => {
         <>
           <div className="flex items-center justify-between">
             <p className="text-white mt-12">Halo, {name}!</p>
-            <button className="text-white font-bold mt-12 cursor-pointer" onClick={handleLogout}>
-              Logout
+            <button className="text-white font-bold mt-12 cursor-pointer" onClick={toggleProfileModal}>
+              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-8 w-8 rounded-full" />
             </button>
           </div>
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
               <div className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`} key={index}>
-              {msg.sender.name !== name && (
-                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2 imgBorder"  />
-              )}
-              <div className="flex flex-col right-text">
-                <div className="flex items-center">
-                  <p id="textSizeName" className="text-white font-bold">{msg.sender.name}</p>
-                  {adminNames.includes(msg.sender.name) && (
-                    <img src="/adminIcon.png" alt="Admin Verification Icon" className="h-4 w-4 ml-1" />
-                  )}
+                {msg.sender.name !== name && (
+                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2 imgBorder" />
+                )}
+                <div className="flex flex-col right-text">
+                  <div className="flex items-center">
+                    <p id="textSizeName" className="text-white font-bold">{msg.sender.name}</p>
+                    {adminNames.includes(msg.sender.name) && (
+                      <img src="/adminIcon.png" alt="Admin Verification Icon" className="h-4 w-4 ml-1" />
+                    )}
+                  </div>
+                  <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
+                  <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
-                <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
-                <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
+                {msg.sender.name === name && (
+                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left imgBorder" />
+                )}
               </div>
-              {msg.sender.name === name && (
-                <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left imgBorder" />
-              )}
-            </div>
             ))}
             <div ref={messagesEndRef}></div>
           </div>
@@ -347,6 +354,26 @@ const Chat = () => {
               <img src="/paper-plane.png" alt="Send" className="h-5 w-5 lg:h-6 lg:w-6 filter invert" />
             </button>
           </div>
+
+          <Modal
+            isOpen={isProfileModalOpen}
+            onRequestClose={toggleProfileModal}
+            contentLabel="Profile Modal"
+            className="profile-modal"
+            overlayClassName="profile-modal-overlay"
+          >
+            <div className="profile-modal-content">
+              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-24 w-24 rounded-full mx-auto" />
+              <p className="text-center text-white mt-4">{name}</p>
+              {adminNames.includes(name) && (
+                <p className="text-center text-green-500 font-bold">Verified Admin</p>
+              )}
+              <p className="text-center text-white">Total messages: {messageCount}</p>
+              <button className="logout mt-5 text-white rounded block" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          </Modal>
         </>
       )}
     </div>
