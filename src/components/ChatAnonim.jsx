@@ -235,14 +235,27 @@ const Chat = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setSelectedImage(reader.result);
-    };
+  
     if (file) {
       // Pastikan file yang diunggah adalah gambar dengan format yang diizinkan
       if (file.type.startsWith('image/') && ['image/gif', 'image/png', 'image/jpeg'].includes(file.type)) {
-        reader.readAsDataURL(file);
+        // Validasi ukuran file
+        if (file.size <= 700 * 1024) { // 700 KB dalam byte
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setSelectedImage(reader.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ukuran File Terlalu Besar',
+            text: 'Ukuran file gambar GIF melebihi batas maksimal 700 KB.',
+            customClass: {
+              container: 'sweet-alert-container',
+            },
+          });
+        }
       } else {
         Swal.fire({
           icon: 'error',
