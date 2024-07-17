@@ -444,7 +444,7 @@ r-track {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin-left: 10px;
+	
   }
   
   .profile-modal {
@@ -458,6 +458,7 @@ r-track {
 	position: absolute;
 	backdrop-filter: blur(5px);
 	top: 40%;
+	margin-left: 10px;
 	left: 50%;
 	transform: translate(-50%, -50%);
   }
