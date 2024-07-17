@@ -310,7 +310,7 @@ const Chat = () => {
             {messages.map((msg, index) => (
               <div key={index} className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`}>
                 {msg.sender.name !== name && (
-                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2"  />
+                  <img src={msg.sender.image} alt="User Profile" className="h-13 w-13 rounded-full mr-2"  />
                 )}
                 <div className="flex flex-col right-text">
                   <p id="textSizeName" className="text-white font-bold">{msg.sender.name}</p>
@@ -318,7 +318,7 @@ const Chat = () => {
                   <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
                 {msg.sender.name === name && (
-                  <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full ml-2 left" />
+                  <img src={msg.sender.image} alt="User Profile" className="h-13 w-13 rounded-full ml-2 left" />
                 )}
               </div>
             ))}
