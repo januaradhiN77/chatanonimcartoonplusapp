@@ -240,14 +240,14 @@ const Chat = () => {
       setSelectedImage(reader.result);
     };
     if (file) {
-      // Pastikan file yang diunggah adalah GIF
-      if (file.type.startsWith('image/gif')) {
+      // Pastikan file yang diunggah adalah gambar dengan format yang diizinkan
+      if (file.type.startsWith('image/') && ['image/gif', 'image/png', 'image/jpeg'].includes(file.type)) {
         reader.readAsDataURL(file);
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Format Tidak Didukung',
-          text: 'Harap unggah file GIF untuk gambar profil.',
+          text: 'Harap unggah file GIF, PNG, JPG, atau JPEG untuk gambar profil.',
           customClass: {
             container: 'sweet-alert-container',
           },
@@ -275,8 +275,8 @@ const Chat = () => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Masukkan nama kamu..."
           />
-          <p className="text-white font-bold mt-5">Pilih gambar untuk profil png/gif (opsional)</p>
-          <input type="file" onChange={handleImageChange} accept="image/gif" className="mb-2 text-white mt-2" />
+          <p className="text-white font-bold mt-5">Pilih gambar untuk profil (opsional)</p>
+          <input type="file" onChange={handleImageChange} accept="image/gif, image/png, image/jpeg" className="mb-2 text-white mt-2" />
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
