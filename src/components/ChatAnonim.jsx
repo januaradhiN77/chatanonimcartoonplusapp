@@ -340,7 +340,7 @@ const Chat = () => {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ketik pesan..."
+                placeholder="Ketik pesan"
               />
             </div>
             <button onClick={sendMessage} id="send" className="ml-2 bg-black p-2 rounded">
