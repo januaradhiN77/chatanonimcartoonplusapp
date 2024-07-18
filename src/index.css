@@ -443,12 +443,12 @@ r-track {
 	background-color: rgba(0, 0, 0, 0.425);
 	display: flex;
 	align-items: center;
-	width: 100%;
+	width: 110%;
 	height: 100vh;
 	position: absolute;
 	justify-content: center;
 	margin-top: -690px;
-
+	margin-left: 20px;
   }
   
   .profile-modal {
