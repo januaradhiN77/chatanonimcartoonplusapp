@@ -443,11 +443,11 @@ r-track {
 	background-color: rgba(0, 0, 0, 0.425);
 	display: flex;
 	align-items: center;
-	width: 135%;
+	width: 100%;
 	height: 100vh;
 	position: absolute;
 	justify-content: center;
-	margin-top: -680px;
+	margin-top: -690px;
 
   }
   
@@ -460,8 +460,8 @@ r-track {
 	outline: none;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(5px);
-	margin-top:-20px;
-	margin-left: 10px;
+	margin-top:-40px;
+
 
 
   }
