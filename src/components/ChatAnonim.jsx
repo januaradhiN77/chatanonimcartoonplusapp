@@ -16,6 +16,7 @@ const Chat = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isSendingMessage, setIsSendingMessage] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const chatsCollectionRef = collection(db, "chats");
   const usernamesCollectionRef = collection(db, "usernames");
@@ -197,8 +198,6 @@ const Chat = () => {
     }
   };
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleNameSubmit = async () => {
     if (name.trim() === "") {
       Swal.fire({
@@ -253,6 +252,8 @@ const Chat = () => {
           const reader = new FileReader();
           reader.onloadend = () => {
             setSelectedImage(reader.result);
+            // Simpan gambar profil yang baru dipilih ke localStorage
+            localStorage.setItem("userImage", reader.result);
           };
           reader.readAsDataURL(file);
         } else {
@@ -336,7 +337,7 @@ const Chat = () => {
           <div className="flex items-center justify-between">
             <p className="text-white mt-12">Halo, {name}!</p>
             <button className="text-white font-bold mt-12 cursor-pointer" onClick={toggleProfileModal}>
-              <img src="/AnonimUser.png" alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
+              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
             </button>
           </div>
 
@@ -393,6 +394,23 @@ const Chat = () => {
               {adminNames.includes(name) && (
                 <p className="text-center text-green-500 font-bold">Verified Admin</p>
               )}
+              <label className="custom-file-input-label mt-5">
+                <input type="file" onChange={handleImageChange} accept="image/gif, image/png, image/jpeg" className="custom-file-input" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="h-12 w-12 mx-auto text-gray-400">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+                <p className="text-white opacity-60">Ubah gambar profil</p>
+              </label>
               <button className="logout mt-5 text-white rounded block" onClick={handleLogout}>
                 Logout
               </button>
