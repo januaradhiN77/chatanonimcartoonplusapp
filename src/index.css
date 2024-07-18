@@ -440,27 +440,30 @@ r-track {
 	margin-left: -8px;
 }
 .profile-modal-overlay {
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(0, 0, 0, 0.425);
 	display: flex;
 	align-items: center;
+	width: 100%;
+	height: 100vh;
+	position: absolute;
 	justify-content: center;
-	
+	margin-top: -660px;
+
   }
   
   .profile-modal {
-	background: rgba(16, 22, 44, 0.966)e7;
+	background: rgb(16, 22, 44)e7;
 	border-radius: 10px;
 	padding: 20px;
-	max-width: 400px;
+	
 	width: 80%;
 	outline: none;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	position: absolute;
 	backdrop-filter: blur(5px);
-	top: 40%;
+	margin-top:-20px;
 	margin-left: 10px;
-	left: 50%;
-	transform: translate(-50%, -50%);
+
+
   }
   
   .profile-modal-content {
