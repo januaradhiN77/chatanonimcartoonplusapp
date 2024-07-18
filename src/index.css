@@ -448,7 +448,7 @@ r-track {
 	position: absolute;
 	justify-content: center;
 	margin-top: -690px;
-	margin-left: 20px;
+
   }
   
   .profile-modal {
@@ -460,7 +460,7 @@ r-track {
 	outline: none;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(5px);
-	margin-top:-40px;
+	margin-top:-60px;
 
 
 
