@@ -197,6 +197,8 @@ const Chat = () => {
     }
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleNameSubmit = async () => {
     if (name.trim() === "") {
       Swal.fire({
@@ -208,6 +210,7 @@ const Chat = () => {
         },
       });
     } else {
+      setIsSubmitting(true);
       const nameTaken = await checkIfNameTaken(name);
       if (nameTaken) {
         Swal.fire({
@@ -226,6 +229,7 @@ const Chat = () => {
         }
         setIsNameEntered(true);
       }
+       setIsSubmitting(false);
     }
   };
 
@@ -322,8 +326,9 @@ const Chat = () => {
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
+            disabled={isSubmitting}
           >
-            Lanjut
+            {isSubmitting ? "Loading..." : "Lanjut"}
           </button>
         </div>
       ) : (
@@ -331,7 +336,7 @@ const Chat = () => {
           <div className="flex items-center justify-between">
             <p className="text-white mt-12">Halo, {name}!</p>
             <button className="text-white font-bold mt-12 cursor-pointer" onClick={toggleProfileModal}>
-              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
+              <img src="/AnonimUser.png" alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
             </button>
           </div>
 
