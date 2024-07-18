@@ -465,6 +465,30 @@ r-track {
 
 
   }
+  .custom-file-input {
+	display: none;
+  }
+  
+  .custom-file-input-label {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 1rem;
+  }
+  
+  .custom-file-input-label svg {
+	height: 3rem;
+	width: 3rem;
+	margin-bottom: 0.5rem;
+	color: #9ca3af;
+  }
+  
+  .custom-file-input-label p {
+	color: white;
+	opacity: 0.6;
+  }
   
   .profile-modal-content {
 	text-align: center;

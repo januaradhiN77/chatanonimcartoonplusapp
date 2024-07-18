@@ -297,8 +297,23 @@ const Chat = () => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Masukkan nama kamu..."
           />
-          <p className="text-white font-bold mt-5">Pilih gambar untuk profil (opsional)</p>
-          <input type="file" onChange={handleImageChange} accept="image/gif, image/png, image/jpeg" className="mb-2 text-white mt-2" />
+          <label className="custom-file-input-label">
+            <input type="file" onChange={handleImageChange} accept="image/gif, image/png, image/jpeg" className="custom-file-input" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="h-12 w-12 mx-auto text-gray-400">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            <p className="text-white opacity-60">Pilih gambar profil (opsional)</p>
+          </label>
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
