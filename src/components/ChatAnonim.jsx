@@ -314,6 +314,11 @@ const Chat = () => {
             </svg>
             <p className="text-white opacity-60">Pilih gambar profil (opsional)</p>
           </label>
+          {selectedImage && (
+            <div className="mt-4">
+              <img src={selectedImage} alt="Selected Profile" className="h-24 w-24 rounded-full mx-auto imgBorder" />
+            </div>
+          )}
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
@@ -326,7 +331,7 @@ const Chat = () => {
           <div className="flex items-center justify-between">
             <p className="text-white mt-12">Halo, {name}!</p>
             <button className="text-white font-bold mt-12 cursor-pointer" onClick={toggleProfileModal}>
-              <img src="/AnonimUser.png" alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
+              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-11 w-11 rounded-full imgBorder" />
             </button>
           </div>
 
@@ -378,7 +383,7 @@ const Chat = () => {
             overlayClassName="profile-modal-overlay"
           >
             <div className="profile-modal-content">
-              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-24 w-24 rounded-full mx-auto" />
+              <img src={selectedImage || "/AnonimUser.png"} alt="Profile" className="h-24 w-24 rounded-full mx-auto imgBorder" />
               <p className="text-center text-white mt-4">{name}</p>
               {adminNames.includes(name) && (
                 <p className="text-center text-green-500 font-bold">Verified Admin</p>
