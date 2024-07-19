@@ -323,30 +323,9 @@ body {
 	
 	padding:0px;
 }
-.bg-black-message {
-	background-color: #101220f1;
-	padding: 13px 10px;
-	border: 1px solid rgba(255, 255, 255, 0.09);
-	border-radius: 25px 25px 25px 0px;
-	width: 98%;
-	word-break: break-word;
-	margin-top: 10px;
-	display: flex;
-	
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	word-wrap: break-word;
-  }
-  .imgBorder{
-	border: 2px solid rgba(255, 255, 255, 0.09);
-  }
-  .left{
-	margin-left:auto;
-	
-  }
-  .right-text{
-	margin-left: 10px;
-  }
-  .bg-black-message-sender {
+
+.bg-black-message-sender {
+	position: relative; /* Tambahkan posisi relatif */
 	background-color: #101220f1;
 	padding: 10px 13px;
 	border: 1px solid rgba(255, 255, 255, 0.09);
@@ -357,11 +336,33 @@ body {
 	display: flex;
 	margin-right: 4px;
 	justify-content: left;
-	
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	word-wrap: break-word;
-	
 	word-break: break-word;
+  }
+  .bg-black-message {
+	position: relative; /* Tambahkan posisi relatif */
+	background-color: #101220f1;
+	padding: 13px 10px;
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	border-radius: 25px 25px 25px 0px;
+	width: 98%;
+	word-break: break-word;
+	margin-top: 10px;
+	display: flex;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	word-wrap: break-word;
+  }
+
+  .imgBorder{
+	border: 2px solid rgba(255, 255, 255, 0.09);
+  }
+  .left{
+	margin-left:auto;
+	
+  }
+  .right-text{
+	margin-left: 10px;
   }
 .modal-container {
 	max-width: auto;
@@ -562,6 +563,34 @@ r-track {
 	text-align:center;
 	display: flex;
 }
+.opacityBgImage {
+    position: relative;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.opacityBgImage::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3; /* Adjust opacity as needed */
+    z-index: -1; /* Ensure it's behind the content */
+}
+
+.opacityBgImage > * {
+    position: relative;
+    z-index: 1; /* Ensure content is above the background */
+}
+
+  
+  
+  
+  
 /* Menghilangkan outline putih saat input dalam fokus */
 input:focus {
 	outline: none; /* Menghapus outline */

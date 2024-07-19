@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const Chat = () => {
   const [name, setName] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [shouldScrollToBottom, setShouldScrollToBottom] = useState(true);
@@ -22,7 +23,7 @@ const Chat = () => {
   const usernamesCollectionRef = collection(db, "usernames");
   const messagesEndRef = useRef(null);
 
-  const adminNames = ["Januarzzz", "bukan kafka", "Admin3"];
+  const adminNames = ["Januarzzz", "bukan kafka", "EkiZR"];
 
   useEffect(() => {
     const queryChats = query(chatsCollectionRef, orderBy("timestamp"));
@@ -172,9 +173,11 @@ const Chat = () => {
         },
         timestamp: new Date(),
         userIp: userIp,
+        backgroundImage: backgroundImage
       });
 
       setMessage("");
+      setBackgroundImage(null);
       setTimeout(() => {
         setShouldScrollToBottom(true);
         setIsSendingMessage(false);
@@ -278,7 +281,34 @@ const Chat = () => {
       }
     }
   };
-
+  const handleBackgroundImageChange = (e) => {
+    const file = e.target.files[0];
+    
+    if (file) {
+      if (file.type.startsWith('image/') && ['image/gif', 'image/png', 'image/jpeg'].includes(file.type)) {
+        if (file.size <= 700 * 1024) { // 700 KB dalam byte
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setBackgroundImage(reader.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Ukuran File Terlalu Besar',
+            text: 'Ukuran file gambar melebihi batas maksimal 700 KB.',
+          });
+        }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Format Tidak Didukung',
+          text: 'Hanya file GIF, PNG, JPG, dan JPEG yang diperbolehkan.',
+        });
+      }
+    }
+  };
+  
   const formatTimestamp = (timestamp) => {
     const date = timestamp.toDate();
     const options = { year: "numeric", month: "short", day: "numeric" };
@@ -324,6 +354,29 @@ const Chat = () => {
               <img src={selectedImage} alt="Selected Profile" className="h-24 w-24 rounded-full mx-auto imgBorder" />
             </div>
           )}
+          <label className="custom-file-input-label">
+          <input
+  type="file"
+  accept="image/*"
+  onChange={handleBackgroundImageChange}
+  className="custom-file-input"
+/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="h-12 w-12 mx-auto text-gray-400">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            <p className="text-white opacity-60">Pilih gambar background (opsional)</p>
+          </label>
+         
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
@@ -343,7 +396,7 @@ const Chat = () => {
 
           <div className="mt-1 flex-grow overflow-y-auto" id="KotakPesan">
             {messages.map((msg, index) => (
-              <div className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`} key={index}>
+             <div className={`flex ${msg.sender.name === name ? "justify-end" : "justify-start"} items-start py-1 ${msg.sender.name === name ? "bg-black-message-sender" : "bg-black-message"} rounded-md p-2 mb-2 max-w-[75%]`} key={index} style={{ backgroundImage: msg.backgroundImage ? `url(${msg.backgroundImage})` : 'none'}}>
                 {msg.sender.name !== name && (
                   <img src={msg.sender.image} alt="User Profile" className="h-12 w-12 rounded-full mr-2 imgBorder" />
                 )}
@@ -411,6 +464,8 @@ const Chat = () => {
                 </svg>
                 <p className="text-white opacity-60">Ubah gambar profil</p>
               </label>
+              
+
               <button className="logout mt-5 text-white rounded block" onClick={handleLogout}>
                 Logout
               </button>
