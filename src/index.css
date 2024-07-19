@@ -340,6 +340,8 @@ body {
 	justify-content: left;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	word-wrap: break-word;
+ /* Menyesuaikan ukuran gambar dengan ukuran elemen */
+
 	word-break: break-word;
   }
   .bg-black-message {
@@ -351,6 +353,8 @@ body {
 	width: 98%;
 	word-break: break-word;
 	background-size: cover;
+/* Menyesuaikan ukuran gambar dengan ukuran elemen */
+
 	background-position: center;
 	margin-top: 10px;
 	display: flex;

@@ -376,7 +376,6 @@ const Chat = () => {
             </svg>
             <p className="text-white opacity-60">Pilih gambar background (opsional)</p>
           </label>
-         
           <button
             id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
             onClick={handleNameSubmit}
