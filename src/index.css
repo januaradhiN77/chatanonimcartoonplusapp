@@ -344,6 +344,9 @@ body {
 
 	word-break: break-word;
   }
+  .topLogin{
+	margin-top: -25px;
+  }
   .bg-black-message {
 	position: relative; /* Tambahkan posisi relatif */
 	background-color: #101220f1;

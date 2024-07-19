@@ -333,7 +333,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center topLogin">
      {!isNameEntered ? (
   <div id="InputName" className="flex flex-col justify-center items-center mt-5">
     <input
