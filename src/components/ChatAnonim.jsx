@@ -407,7 +407,7 @@ const Chat = () => {
                       <img src="/adminIcon.png" alt="Admin Verification Icon" className="h-4 w-4 ml-1" />
                     )}
                   </div>
-                  <p id="textSizeMessage" className="text-gray-400">{msg.message}</p>
+                  <p id="textSizeMessage" className="text-white">{msg.message}</p>
                   <p className="text-xs text-gray-400 mt-2">{formatTimestamp(msg.timestamp)}</p>
                 </div>
                 {msg.sender.name === name && (

@@ -332,6 +332,8 @@ body {
 	border-radius: 25px 25px 0px 25px;
 	width: 98%;
 	margin-left: auto;
+	background-size: cover;
+	background-position: center;
 	margin-top: 10px;
 	display: flex;
 	margin-right: 4px;
@@ -348,6 +350,8 @@ body {
 	border-radius: 25px 25px 25px 0px;
 	width: 98%;
 	word-break: break-word;
+	background-size: cover;
+	background-position: center;
 	margin-top: 10px;
 	display: flex;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
