@@ -333,7 +333,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center topLogin">
+    <div className="flex flex-col justify-center">
      {!isNameEntered ? (
   <div id="InputName" className="flex flex-col justify-center items-center mt-5">
     <input
@@ -388,7 +388,7 @@ const Chat = () => {
       <p className="text-white opacity-60">Pilih gambar background (opsional)</p>
     </label>
     {backgroundImagePreview && (
-      <div className="mt-4 w-full h-48 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImagePreview})` }}>
+      <div className="mt-4 w-full h-28 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImagePreview})` }}>
         <div className="w-full h-full bg-black opacity-50"></div>
       </div>
     )}
