@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 const Chat = () => {
   const [name, setName] = useState("");
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [backgroundImagePreview, setBackgroundImagePreview] = useState(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [shouldScrollToBottom, setShouldScrollToBottom] = useState(true);
@@ -49,6 +50,8 @@ const Chat = () => {
     scrollToBottom();
     const storedName = localStorage.getItem("userName");
     const storedImage = localStorage.getItem("userImage");
+    const storedBackgroundImage = localStorage.getItem("backgroundImage");
+  
     if (storedName) {
       setName(storedName);
       setIsNameEntered(true);
@@ -56,7 +59,11 @@ const Chat = () => {
     if (storedImage) {
       setSelectedImage(storedImage);
     }
+    if (storedBackgroundImage) {
+      setBackgroundImage(storedBackgroundImage);
+    }
   }, []);
+  
 
   const scrollToBottom = () => {
     setTimeout(() => {
@@ -283,13 +290,16 @@ const Chat = () => {
   };
   const handleBackgroundImageChange = (e) => {
     const file = e.target.files[0];
-    
+  
     if (file) {
       if (file.type.startsWith('image/') && ['image/gif', 'image/png', 'image/jpeg'].includes(file.type)) {
-        if (file.size <= 700 * 1024) { // 700 KB dalam byte
+        if (file.size <= 700 * 1024) { // 700 KB in bytes
           const reader = new FileReader();
           reader.onloadend = () => {
-            setBackgroundImage(reader.result);
+            const imageURL = reader.result;
+            setBackgroundImage(imageURL);
+            setBackgroundImagePreview(imageURL); // Update preview state
+            localStorage.setItem("backgroundImage", imageURL); // Save to localStorage
           };
           reader.readAsDataURL(file);
         } else {
@@ -309,6 +319,7 @@ const Chat = () => {
     }
   };
   
+  
   const formatTimestamp = (timestamp) => {
     const date = timestamp.toDate();
     const options = { year: "numeric", month: "short", day: "numeric" };
@@ -323,67 +334,72 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col justify-center">
-      {!isNameEntered ? (
-        <div id="InputName" className="flex flex-col justify-center items-center mt-5">
-          <input
-            className="bg-transparent text-white placeholder-opacity-60 placeholder-white mb-2 justify-center"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Masukkan nama kamu..."
-          />
-          <label className="custom-file-input-label">
-            <input type="file" onChange={handleImageChange} accept="image/gif, image/png, image/jpeg" className="custom-file-input" />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-12 w-12 mx-auto text-gray-400">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            <p className="text-white opacity-60">Pilih gambar profil (opsional)</p>
-          </label>
-          {selectedImage && (
-            <div className="mt-4">
-              <img src={selectedImage} alt="Selected Profile" className="h-24 w-24 rounded-full mx-auto imgBorder" />
-            </div>
-          )}
-          <label className="custom-file-input-label">
-          <input
-  type="file"
-  accept="image/*"
-  onChange={handleBackgroundImageChange}
-  className="custom-file-input"
-/>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-12 w-12 mx-auto text-gray-400">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            <p className="text-white opacity-60">Pilih gambar background (opsional)</p>
-          </label>
-          <button
-            id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
-            onClick={handleNameSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Loading..." : "Lanjut"}
-          </button>
-        </div>
+     {!isNameEntered ? (
+  <div id="InputName" className="flex flex-col justify-center items-center mt-5">
+    <input
+      className="bg-transparent text-white placeholder-opacity-60 placeholder-white mb-2 justify-center"
+      type="text"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      placeholder="Masukkan nama kamu..."
+    />
+    <label className="custom-file-input-label">
+      <input type="file" onChange={handleImageChange} accept="image/gif, image/png, image/jpeg" className="custom-file-input" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        className="h-12 w-12 mx-auto text-gray-400">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        />
+      </svg>
+      <p className="text-white opacity-60">Pilih gambar profil (opsional)</p>
+    </label>
+    {selectedImage && (
+      <div className="mt-4">
+        <img src={selectedImage} alt="Selected Profile" className="h-24 w-24 rounded-full mx-auto imgBorder" />
+      </div>
+    )}
+    <label className="custom-file-input-label">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleBackgroundImageChange}
+        className="custom-file-input"
+      />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        className="h-12 w-12 mx-auto text-gray-400">
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+        />
+      </svg>
+      <p className="text-white opacity-60">Pilih gambar background (opsional)</p>
+    </label>
+    {backgroundImagePreview && (
+      <div className="mt-4 w-full h-48 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImagePreview})` }}>
+        <div className="w-full h-full bg-black opacity-50"></div>
+      </div>
+    )}
+    <button
+      id="sendSumbit" className="bg-black text-white px-4 py-2 mt-2 rounded"
+      onClick={handleNameSubmit}
+      disabled={isSubmitting}
+    >
+      {isSubmitting ? "Loading..." : "Lanjut"}
+    </button>
+  </div>
       ) : (
         <>
           <div className="flex items-center justify-between">
